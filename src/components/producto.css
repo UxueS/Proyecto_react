@@ -101,3 +101,46 @@
 .modal-footer button {
     font-size: 14px;
 }
+
+
+/* Contenedor de la cantidad */
+.cantidad-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Botones de + y - */
+.cantidad-boton {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    min-width: 40px;
+}
+
+/* Texto de cantidad */
+.cantidad-texto {
+    font-size: 18px;
+    font-weight: bold;
+    width: 40px;
+    text-align: center;
+}
+
+/* Botón "Añadir al carro" */
+.carrito-boton {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carrito-boton:hover {
+    background-color: #0056b3;
+}
+

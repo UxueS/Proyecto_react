@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Usaremos Link para redirección
-
+import { Link } from 'react-router-dom'; // Importamos Link para navegación
 import './Header.css';
 
 const Header = () => {
@@ -11,9 +10,10 @@ const Header = () => {
       </div>
       <nav className="nav">
         <ul>
-          <li><Link to="#home">Inicio</Link></li>
-          <li><Link to="#productos">Productos</Link></li>
-          <li><Link to="#contacto">Contacto</Link></li>
+          <li><Link to="/">Inicio</Link></li> {/* Redirige a la página principal */}
+          <li><Link to="/#productos">Productos</Link></li>
+          <li><Link to="/#contacto">Contacto</Link></li>
+          <li><Link to="/cesta">Cesta</Link></li> {/* Ahora funciona correctamente */}
         </ul>
       </nav>
     </header>
