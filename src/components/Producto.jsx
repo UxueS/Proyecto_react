@@ -16,9 +16,10 @@ function Producto({ nombre, imagen, precio, descripcion }) {
     };
 
     const handleAddToCart = () => {
-        addToCart({ nombre, imagen, precio }, cantidad);
-        setCantidad(0); // Reiniciar la cantidad después de agregar
+        addToCart({ nombre, imagen, precio: parseFloat(precio) }, cantidad); // Convertimos precio a número
+        setCantidad(0); // Reiniciar cantidad después de agregar
     };
+    
 
     return (
         <Container fluid className="producto">

@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Header className="header" />
       <div className="main-content">
-        <h1>Tienda de material escolar</h1>
+        <h1>Escoge tus artículos favoritos</h1>
         <Routes> {/* Solo Routes, sin Router */}
           <Route path="/" element={<Productos />} />
           <Route path="/cesta" element={<Cesta />} /> {/* Asegúrate de que el nombre sea correcto */}
