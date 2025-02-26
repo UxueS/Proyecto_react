@@ -2,16 +2,16 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './ui/Header';
-import Producto from './components/Producto'
+import Productos from "./components/Productos";
+import "./components/producto.css";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Header />
-        <Producto />
-        <Producto />
-        {/* Aquí puedes agregar el contenido principal de la app */}
+        <h1>Tienda de Material Escolar</h1>
+        <Productos />
       </div>
     </Router>
   );
