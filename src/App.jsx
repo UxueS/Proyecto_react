@@ -11,12 +11,15 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Header />
-        <h1>Tienda de Material Escolar</h1>
-        <Productos />
-      </div>
-    </Router>
+    <div className="App">
+        <Header className="header" />
+        <div className="main-content">
+            <h1>Tienda de material escolar</h1>
+            <Productos />
+        </div>
+    </div>
+</Router>
+
   );
 }
 

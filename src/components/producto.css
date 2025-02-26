@@ -1,13 +1,25 @@
+/* Contenedor de la lista de productos */
+.productos-container {
+    width: 100vw; /* Asegura que los productos ocupen todo el ancho */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+}
+
 /* Contenedor principal del producto */
 .producto {
-    width: 100%;
-    max-width: 1000px; /* Controla el ancho en pantallas grandes */
-    margin: 10px auto;
+    width: 100%; /* Producto ocupa todo el ancho */
+    max-width: 1200px; /* Controla el ancho en pantallas grandes */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 15px;
     border: 2px solid #ddd;
     border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 /* Asegurar que los elementos dentro de cada producto estén alineados */
@@ -15,6 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
 /* Imagen del producto */
@@ -26,16 +39,14 @@
 
 /* Información del producto */
 .producto-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex: 1; /* Hace que el contenido se ajuste dinámicamente */
+    padding: 0 15px;
 }
 
 /* Nombre del producto */
 .producto-nombre {
     font-size: 18px;
     font-weight: bold;
-    margin: 0;
 }
 
 /* Precio del producto */
@@ -43,7 +54,6 @@
     color: green;
     font-size: 16px;
     font-weight: bold;
-    margin: 0;
 }
 
 /* Contenedor del botón */
@@ -61,6 +71,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 /* Efecto hover en el botón */
