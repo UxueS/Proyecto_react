@@ -4,6 +4,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './ui/Header';
 import Productos from "./components/Productos";
 import "./components/producto.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 
 function App() {
   return (
