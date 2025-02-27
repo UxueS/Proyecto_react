@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './ui/Header';
+import Footer from './ui/Footer';
 import Productos from "./components/Productos";
 import Cesta from "./pages/Cart";
 import Contacto from "./pages/Contacto";
@@ -24,7 +25,9 @@ function App() {
           <Route path="/contacto" element={<Contacto />} />
         </Routes>
       </div>
+      <Footer  />
     </div>
+    
   );
 }
 

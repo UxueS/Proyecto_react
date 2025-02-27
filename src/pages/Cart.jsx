@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext } from "react"; 
 import { CartContext } from "../context/CartContext";
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Card } from "react-bootstrap";
+import { FaShoppingCart } from "react-icons/fa";
 
 function Cart() {
     const { cart } = useContext(CartContext);
@@ -10,35 +11,40 @@ function Cart() {
 
     return (
         <Container className="mt-5">
-            <h1>Carrito de Compras</h1>
+            <h1 className="text-center mb-4" style={{ fontSize: "2.5rem" }}>Carrito de Compras</h1>
             {cart.length === 0 ? (
-                <p>Tu carrito está vacío</p>
+                <Card className="text-center p-5 mx-auto shadow-lg" style={{ maxWidth: "600px", minHeight: "300px", display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "80px" }}>
+                    {/* Icono negro */}
+                    <FaShoppingCart size={100} className="text-dark mb-4" />
+                    <Card.Body>
+                        <Card.Text className="fs-4 fw-bold">Tu carrito está vacío</Card.Text>
+                    </Card.Body>
+                </Card>
             ) : (
                 <>
-                    <Table striped bordered hover>
+                    <Table striped bordered hover className="shadow-sm" style={{ fontSize: "2rem", borderCollapse: "separate", borderSpacing: "0 15px" }}>
                         <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio Unitario</th>
-                                <th>Total</th>
+                            <tr className="bg-primary text-white">
+                                <th style={{ minWidth: "300px", padding: "20px" }}>Producto</th>
+                                <th style={{ minWidth: "250px", padding: "20px" }}>Cantidad</th>
+                                <th style={{ minWidth: "300px", padding: "20px" }}>Precio Unitario</th>
+                                <th style={{ minWidth: "300px", padding: "20px" }}>Total</th>
                             </tr>
                         </thead>
                         <tbody>
                             {cart.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item.nombre.trim()}</td>
-                                    <td>{item.cantidad || 0}</td>
-                                    <td>{item.precio ? `${parseFloat(item.precio).toFixed(2)} €` : "0.00 €"}</td>
-                                    <td>{item.precio ? `${(parseFloat(item.precio) * item.cantidad).toFixed(2)} €` : "0.00 €"}</td>
+                                    <td style={{ padding: "15px" }}>{item.nombre.trim()}</td>
+                                    <td style={{ padding: "15px" }}>{item.cantidad || 0}</td>
+                                    <td style={{ padding: "15px" }}>{item.precio ? `${parseFloat(item.precio).toFixed(2)} €` : "0.00 €"}</td>
+                                    <td style={{ padding: "15px" }}>{item.precio ? `${(parseFloat(item.precio) * item.cantidad).toFixed(2)} €` : "0.00 €"}</td>
                                 </tr>
                             ))}
                         </tbody>
-
                     </Table>
 
                     {/* Mostrar el total de la compra */}
-                    <h3 className="text-end mt-3">Total: {totalCompra.toFixed(2)} €</h3>
+                    <h3 className="text-end mt-3 fw-bold" style={{ fontSize: "2rem" }}>Total: {totalCompra.toFixed(2)} €</h3>
                 </>
             )}
         </Container>
