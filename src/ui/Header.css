@@ -1,34 +1,55 @@
-/* HEADER FIJO Y ADAPTABLE */
 .header {
   display: flex;
-  justify-content: space-between; /* Distribuye logo a la izquierda y menú a la derecha */
+  justify-content: space-between;
   align-items: center;
-  width: 100vw; /* Ocupa todo el ancho de la pantalla */
-  height: 80px; /* Ajusta la altura del header */
-  position: fixed;
+  width: 100vw;
+  height: 5rem;
+  position:absolute;
   top: 0;
   left: 0;
-  background-color: #a8c4e6;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 0 40px; /* Espaciado interno a los lados */
+  background: linear-gradient(135deg, #a8c4e6, #618eff);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 0 2rem;
   z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+ 
 }
 
-/* Estilos del Logo */
-.logo {
+.logo-container {
   display: flex;
   align-items: center;
+  flex: 1.3; 
+  min-width: 6rem; 
 }
 
-.logo .logo-img {
-  height: 60px;
+.logo-container .logo-img {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #12285f; 
+  transition: transform 0.3s ease-in-out;
 }
 
-/* MENÚ DE NAVEGACIÓN */
+.logo-container .logo-img:hover {
+  transform: scale(1.1);
+}
+
+
+.brand-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: white;
+  flex: 1;
+  text-align: center;
+  padding: 0 1rem;
+}
+
 .nav {
   display: flex;
-  flex: 1; /* Hace que el menú se expanda si es necesario */
-  justify-content: flex-end; /* Asegura que las opciones estén alineadas a la derecha */
+  flex: 1.2;
+  justify-content: flex-end;
 }
 
 .nav ul {
@@ -36,44 +57,71 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 30px; /* Espaciado entre elementos */
-  flex-wrap: wrap; /* Permite que el menú se adapte en pantallas pequeñas */
+  gap: 1.2rem;
+  flex-wrap: wrap;
 }
 
 .nav ul li {
-  white-space: nowrap; /* Evita que las palabras se corten */
+  white-space: nowrap;
 }
 
 .nav ul li a {
   text-decoration: none;
-  color: #333;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: color 0.3s ease;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 400;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
   position: relative;
 }
 
-.nav ul li a:hover {
-  color: #618eff;
+.nav ul li a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #12285f;
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
 }
 
-/* RESPONSIVO: Ajustar en pantallas pequeñas */
+.nav ul li a:hover {
+  color: #12285f;
+  transform: scale(1.05);
+}
+
+.nav ul li a:hover::after {
+  transform: scaleX(1);
+}
+
 @media (max-width: 768px) {
   .header {
-      flex-direction: column;
-      height: auto; /* Permite que el header crezca si es necesario */
-      padding: 15px;
-      text-align: center;
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .brand-name {
+    margin: 0;
+    text-align: center;
+    font-size: 1.2rem;
   }
 
   .nav {
-      justify-content: center; /* Centrar el menú en pantallas pequeñas */
-      width: 100%;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
   }
 
   .nav ul {
-      flex-direction: column;
-      gap: 10px;
-      padding-top: 10px;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-top: 10px;
+  }
+
+  .nav ul li a {
+    font-size: 1.1rem;
   }
 }
