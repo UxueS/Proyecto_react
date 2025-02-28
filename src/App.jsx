@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <Header className="header" />
       <div className="main-content">
-        {/* Mostrar el título solo si estamos en la página principal */}
+        
         {location.pathname === '/' && <h2>Escoge tus artículos favoritos</h2>}
         <Routes>
           <Route path="/" element={<Productos />} />
