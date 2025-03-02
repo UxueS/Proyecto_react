@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom'; 
 import './Header.css';
 
-const Header = () => {
+function Header() {
+
+  
+
   return (
     <header className="header">
       <div className="logo-container">
@@ -15,6 +18,7 @@ const Header = () => {
           <li><Link to="/pedidos">Pedidos</Link></li>
           <li><Link to="/contacto">Contacto</Link></li>
           <li><Link to="/cesta">Mi Cesta</Link></li> 
+          <li><Link to="/login">Login</Link></li>
         </ul>
       </nav>
     </header>
