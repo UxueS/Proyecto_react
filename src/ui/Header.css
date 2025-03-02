@@ -18,7 +18,7 @@
 .logo-container {
   display: flex;
   align-items: center;
-  flex: 1; /* Hacer que ocupe solo lo necesario */
+  flex: 1;
   min-width: 6rem; 
 }
 
@@ -47,6 +47,7 @@
 .nav {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   flex: 1;
 }
 
@@ -62,6 +63,7 @@
   white-space: nowrap;
 }
 
+/* Links del menú */
 .nav ul li a {
   text-decoration: none;
   color: #fff;
@@ -90,4 +92,32 @@
 
 .nav ul li a:hover::after {
   transform: scaleX(1);
+}
+
+/* Estilo para el nombre del usuario */
+.nav ul li.user-info {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Botón Logout */
+.logout-btn {
+  background: #ff4d4d;
+  border: none;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.logout-btn:hover {
+  background: #cc0000;
+  transform: scale(1.05);
 }
