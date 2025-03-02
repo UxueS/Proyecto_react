@@ -1,13 +1,17 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
-import { Container, Table, Card, Button, Modal, Form } from "react-bootstrap";
+import { Container, Table, Card, Button, Modal, Form, Alert } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
+import { guardarPedido } from "../services/PedidosService";
+import { useNavigate } from "react-router-dom";
 
-function Cart() {
-    const { cart } = useContext(CartContext);
+function Cart({ usuario }) {
+    const { cart, vaciarCarrito } = useContext(CartContext);
     const [showModal, setShowModal] = useState(false);
     const [showForm, setShowForm] = useState(false);
+    const [showAlert, setShowAlert] = useState(false); // Para mostrar la alerta si intenta comprar sin iniciar sesión
     const [formData, setFormData] = useState({ nombre: "", email: "", direccion: "" });
+    const navigate = useNavigate();
 
     const totalCompra = cart.reduce((total, item) => total + (parseFloat(item.precio) || 0) * item.cantidad, 0);
 
@@ -15,14 +19,46 @@ function Cart() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = () => {
-        alert("Pedido realizado con éxito!");
-        setShowForm(false);
+    const handleSubmit = async () => {
+        if (!usuario || !usuario.email) {
+            setShowAlert(true);
+            return;
+        }
+    
+        console.log("Usuario autenticado:", usuario);
+
+        const pedido = {
+            userId: usuario.email, 
+            destinatarioNombre: formData.nombre.trim(),
+            destinatarioEmail: formData.email.trim(),
+            destinatarioDireccion: formData.direccion.trim(),
+            productos: cart.map(item => ({
+                nombre: item.nombre.trim(),
+                cantidad: item.cantidad,
+                precio: parseFloat(item.precio)
+            })), // 🔹 Convertimos `cart` en un array de objetos correctamente formateados
+            total: totalCompra,
+            fecha: new Date().toISOString()
+        };
+
+        console.log("Pedido a enviar:", pedido); // 📌 Verifica que los datos sean correctos antes de enviarlos
+        
+        const pedidoId = await guardarPedido(pedido);
+        if (pedidoId) {
+            alert(`Pedido realizado con éxito. ID: ${pedidoId}`);
+            vaciarCarrito();
+            setShowForm(false);
+            navigate(`/pedidos/${pedidoId}`); // 🔹 Redirige a la página de detalles del pedido
+        } else {
+            alert("Hubo un error al realizar tu pedido. Inténtalo de nuevo.");
+        }
     };
+    
 
     return (
         <Container className="mt-5 mb-5">
             <h1 className="text-center mb-4" style={{ fontSize: "2.5rem" }}>Carrito de compra</h1>
+
             {cart.length === 0 ? (
                 <Card className="text-center p-5 mx-auto shadow-lg" style={{ maxWidth: "600px", minHeight: "300px", display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "80px" }}>
                     <FaShoppingCart size={100} className="text-dark mb-4" />
@@ -56,7 +92,11 @@ function Cart() {
                     <h3 className="text-end mt-3 fw-bold" style={{ fontSize: "1.8rem" }}>Total: {totalCompra.toFixed(2)} €</h3>
 
                     <div className="text-center mt-5" style={{ marginBottom: "100px" }}>
-                        <Button variant="success" size="lg" className="px-5 py-3 fw-bold shadow-lg rounded" style={{ fontSize: "1.4rem", backgroundColor: "#28a745", border: "none", transition: "0.3s", minWidth: "250px" }} onMouseOver={(e) => e.target.style.backgroundColor = "#218838"} onMouseOut={(e) => e.target.style.backgroundColor = "#28a745"} onClick={() => setShowModal(true)}>
+                        <Button variant="success" size="lg" className="px-5 py-3 fw-bold shadow-lg rounded"
+                            style={{ fontSize: "1.4rem", backgroundColor: "#28a745", border: "none", transition: "0.3s", minWidth: "250px" }}
+                            onMouseOver={(e) => e.target.style.backgroundColor = "#218838"}
+                            onMouseOut={(e) => e.target.style.backgroundColor = "#28a745"}
+                            onClick={() => setShowModal(true)}>
                             ✏️ REALIZAR PEDIDO
                         </Button>
                     </div>
@@ -80,10 +120,8 @@ function Cart() {
                     <h4 className="fw-bold text-end mt-3">Total: {totalCompra.toFixed(2)} €</h4>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>
-                        Cancelar
-                    </Button>
-                    <Button variant="primary" className="fw-bold" onClick={() => { setShowModal(false); setShowForm(true); }}> 
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
+                    <Button variant="primary" className="fw-bold" onClick={() => { setShowModal(false); setShowForm(true); }}>
                         Continuar
                     </Button>
                 </Modal.Footer>
@@ -92,23 +130,56 @@ function Cart() {
             {/* Formulario para la información del cliente */}
             <Modal show={showForm} onHide={() => setShowForm(false)} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Información de Envío</Modal.Title>
+                    <Modal.Title>Información de envío</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <Form.Group>
-                            <Form.Label>Nombre</Form.Label>
-                            <Form.Control type="text" name="nombre" value={formData.nombre} onChange={handleInputChange} required />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" name="email" value={formData.email} onChange={handleInputChange} required />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Dirección de Envío</Form.Label>
-                            <Form.Control type="text" name="direccion" value={formData.direccion} onChange={handleInputChange} required />
-                        </Form.Group>
-                    </Form>
+                <Form>
+                    <Form.Group>
+                        <Form.Label htmlFor="nombre">Nombre</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            id="nombre" 
+                            name="nombre" 
+                            value={formData.nombre} 
+                            onChange={handleInputChange} 
+                            required 
+                            autoComplete="name"
+                        />
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label htmlFor="email">Email</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            value={formData.email} 
+                            onChange={handleInputChange} 
+                            required 
+                            autoComplete="email"
+                        />
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label htmlFor="direccion">Dirección de Envío</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            id="direccion" 
+                            name="direccion" 
+                            value={formData.direccion} 
+                            onChange={handleInputChange} 
+                            required 
+                            autoComplete="street-address"
+                        />
+                    </Form.Group>
+                </Form>
+
+
+                    {showAlert && (
+                        <Alert variant="danger" className="mt-3">
+                            Debes iniciar sesión para realizar un pedido.
+                        </Alert>
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowForm(false)}>Cancelar</Button>
