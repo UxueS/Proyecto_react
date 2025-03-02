@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 
 function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate(); 
+    const [isRegistering, setIsRegistering] = useState(false); // 🔄 Alternar entre login y registro
+    const navigate = useNavigate();
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -17,21 +18,25 @@ function Login(props) {
             returnSecureToken: true,
         };
 
-        axios
-            .post(
-                "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCi7AVbkOaeHy0SmcXtOJ0Yni4ESn7qz5c",
-                authInfo
-            )
-            .then((response) => {
-                alert("Login correcto");
-                console.log(response);
-                props.actualizarLogin(true, response.data);
+        const url = isRegistering
+            ? "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCi7AVbkOaeHy0SmcXtOJ0Yni4ESn7qz5c"
+            : "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCi7AVbkOaeHy0SmcXtOJ0Yni4ESn7qz5c";
 
-                // Redirigir a la página de inicio tras login exitoso
-                navigate("/");
+        axios
+            .post(url, authInfo)
+            .then((response) => {
+                if (isRegistering) {
+                    alert("Registro exitoso. Ahora puedes iniciar sesión.");
+                    setIsRegistering(false); // Volver a la pantalla de login después del registro
+                } else {
+                    alert("Login correcto");
+                    console.log(response);
+                    props.actualizarLogin(true, response.data);
+                    navigate("/"); // 🔄 Redirigir a la pantalla de inicio
+                }
             })
             .catch((error) => {
-                alert("Login incorrecto");
+                alert("Error: " + error.response.data.error.message);
                 console.log(error);
             });
     };
@@ -39,7 +44,8 @@ function Login(props) {
     return (
         <Container className="login-container">
             <Form onSubmit={submitHandler} className="login-form">
-                <h2 className="login-title">Iniciar sesión</h2>
+                <h2 className="login-title">{isRegistering ? "Registro" : "Iniciar sesión"}</h2>
+
                 <Form.Group controlId="formEmail">
                     <Form.Label>Email:</Form.Label>
                     <Form.Control
@@ -63,8 +69,15 @@ function Login(props) {
                 </Form.Group>
 
                 <Button type="submit" variant="primary" className="login-button">
-                    LOGIN
+                    {isRegistering ? "Registrarse" : "Iniciar sesión"}
                 </Button>
+
+                <p className="switch-auth">
+                    {isRegistering ? "¿Ya tienes una cuenta?" : "¿No tienes cuenta?"}{" "}
+                    <span onClick={() => setIsRegistering(!isRegistering)}>
+                        {isRegistering ? "Iniciar sesión" : "Regístrate"}
+                    </span>
+                </p>
             </Form>
         </Container>
     );

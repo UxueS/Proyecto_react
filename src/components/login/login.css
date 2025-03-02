@@ -52,3 +52,20 @@
 .login-button:hover {
     background: #12285f;
 }
+
+.switch-auth {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.switch-auth span {
+    color: #618eff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.switch-auth span:hover {
+    color: #12285f;
+}
