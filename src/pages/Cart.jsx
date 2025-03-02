@@ -32,31 +32,31 @@ function Cart() {
                 </Card>
             ) : (
                 <>
-                    <Table striped bordered hover className="shadow-sm" style={{ fontSize: "2rem", borderCollapse: "separate", borderSpacing: "0 15px" }}>
+                    <Table striped bordered hover className="shadow-sm" style={{ fontSize: "1.5rem", borderCollapse: "separate", borderSpacing: "0 10px" }}>
                         <thead>
-                            <tr className="bg-primary text-white">
-                                <th style={{ minWidth: "300px", padding: "20px" }}>Producto</th>
-                                <th style={{ minWidth: "250px", padding: "20px" }}>Cantidad</th>
-                                <th style={{ minWidth: "300px", padding: "20px" }}>Precio Unitario</th>
-                                <th style={{ minWidth: "300px", padding: "20px" }}>Total</th>
+                            <tr className="bg-primary text-white" style={{ fontSize: "1.6rem" }}>
+                                <th style={{ minWidth: "250px", padding: "15px" }}>Producto</th>
+                                <th style={{ minWidth: "200px", padding: "15px" }}>Cantidad</th>
+                                <th style={{ minWidth: "250px", padding: "15px" }}>Precio Unitario</th>
+                                <th style={{ minWidth: "250px", padding: "15px" }}>Total</th>
                             </tr>
                         </thead>
                         <tbody>
                             {cart.map((item, index) => (
-                                <tr key={index}>
-                                    <td style={{ padding: "15px" }}>{item.nombre.trim()}</td>
-                                    <td style={{ padding: "15px" }}>{item.cantidad || 0}</td>
-                                    <td style={{ padding: "15px" }}>{item.precio ? `${parseFloat(item.precio).toFixed(2)} €` : "0.00 €"}</td>
-                                    <td style={{ padding: "15px" }}>{item.precio ? `${(parseFloat(item.precio) * item.cantidad).toFixed(2)} €` : "0.00 €"}</td>
+                                <tr key={index} style={{ fontSize: "1.4rem" }}>
+                                    <td style={{ padding: "12px" }}>{item.nombre.trim()}</td>
+                                    <td style={{ padding: "12px" }}>{item.cantidad || 0}</td>
+                                    <td style={{ padding: "12px" }}>{item.precio ? `${parseFloat(item.precio).toFixed(2)} €` : "0.00 €"}</td>
+                                    <td style={{ padding: "12px" }}>{item.precio ? `${(parseFloat(item.precio) * item.cantidad).toFixed(2)} €` : "0.00 €"}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </Table>
 
-                    <h3 className="text-end mt-3 fw-bold" style={{ fontSize: "2rem" }}>Total: {totalCompra.toFixed(2)} €</h3>
+                    <h3 className="text-end mt-3 fw-bold" style={{ fontSize: "1.8rem" }}>Total: {totalCompra.toFixed(2)} €</h3>
 
                     <div className="text-center mt-5" style={{ marginBottom: "100px" }}>
-                        <Button variant="success" size="lg" className="px-5 py-3 fw-bold shadow-lg rounded" style={{ fontSize: "1.5rem", backgroundColor: "#28a745", border: "none", transition: "0.3s", minWidth: "250px" }} onMouseOver={(e) => e.target.style.backgroundColor = "#218838"} onMouseOut={(e) => e.target.style.backgroundColor = "#28a745"} onClick={() => setShowModal(true)}>
+                        <Button variant="success" size="lg" className="px-5 py-3 fw-bold shadow-lg rounded" style={{ fontSize: "1.4rem", backgroundColor: "#28a745", border: "none", transition: "0.3s", minWidth: "250px" }} onMouseOver={(e) => e.target.style.backgroundColor = "#218838"} onMouseOut={(e) => e.target.style.backgroundColor = "#28a745"} onClick={() => setShowModal(true)}>
                             ✏️ REALIZAR PEDIDO
                         </Button>
                     </div>
