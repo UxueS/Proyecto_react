@@ -5,7 +5,7 @@ import { CartContext } from "../context/CartContext";
 function Producto({ nombre, imagen, precio, descripcion }) {
     const [show, setShow] = useState(false);
     const [cantidad, setCantidad] = useState(0);
-    const { addToCart } = useContext(CartContext); // Usamos el contexto del carrito
+    const { addToCart } = useContext(CartContext);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -16,42 +16,32 @@ function Producto({ nombre, imagen, precio, descripcion }) {
     };
 
     const handleAddToCart = () => {
-        addToCart({ nombre, imagen, precio: parseFloat(precio) }, cantidad); // Convertimos precio a número
-        setCantidad(0); // Reiniciar cantidad después de agregar
+        addToCart({ nombre, imagen, precio: parseFloat(precio) }, cantidad);
+        setCantidad(0);
     };
     
-
     return (
-        <Container fluid className="producto">
+        <Container fluid className="producto" style={{ marginBottom: "20px", padding: "15px", border: "1px solid #ddd", borderRadius: "10px", boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.1)" }}>
             <Row className="align-items-center">
                 <Col xs={3} md={2} className="d-flex justify-content-center">
-                    <img src={`/icons/${imagen}`} alt={nombre} className="producto-imagen" />
+                    <img src={`/icons/${imagen}`} alt={nombre} style={{ width: "100px", height: "100px", objectFit: "cover" }} />
                 </Col>
-
-                <Col xs={6} md={4} className="producto-info">
-                    <h2 className="producto-nombre">{nombre}</h2>
-                    <p className="producto-precio">{precio} €</p>
+                <Col xs={6} md={4}>
+                    <h2 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "5px" }}>{nombre}</h2>
+                    <p style={{ fontSize: "1.2rem", color: "#555" }}>{precio} €</p>
                 </Col>
-
                 <Col xs={3} md={2} className="d-flex justify-content-center">
-                    <Button variant="warning" onClick={handleShow} className="producto-boton">
-                        Más info
-                    </Button>
+                    <Button variant="warning" onClick={handleShow}>Más info</Button>
                 </Col>
-
-                <Col xs={6} md={2} className="cantidad-container d-flex justify-content-center align-items-center">
-                    <Button variant="danger" className="cantidad-boton" onClick={decrementarCantidad}>-</Button>
-                    <span className="cantidad-texto">{cantidad}</span>
-                    <Button variant="success" className="cantidad-boton" onClick={incrementarCantidad}>+</Button>
+                <Col xs={6} md={2} className="d-flex justify-content-center align-items-center">
+                    <Button variant="danger" onClick={decrementarCantidad} style={{ marginRight: "10px" }}>-</Button>
+                    <span style={{ fontSize: "1.2rem", fontWeight: "bold" }}>{cantidad}</span>
+                    <Button variant="success" onClick={incrementarCantidad} style={{ marginLeft: "10px" }}>+</Button>
                 </Col>
-
                 <Col xs={6} md={2} className="d-flex justify-content-center">
-                    <Button variant="primary" className="carrito-boton" onClick={handleAddToCart}>
-                        Añadir al carro
-                    </Button>
+                    <Button variant="primary" onClick={handleAddToCart}>Añadir al carro</Button>
                 </Col>
             </Row>
-
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Detalles de {nombre}</Modal.Title>

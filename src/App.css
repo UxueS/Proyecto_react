@@ -1,32 +1,26 @@
-/* Asegurar que la aplicación ocupe toda la pantalla */
 #root {
-  width: 100vw; /* Ocupar todo el ancho de la pantalla */
-  min-height: 100vh; /* Asegurar que ocupe toda la altura */
+  width: 100vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0; /* Eliminar padding innecesario */
+  padding: 0;
   text-align: center;
-  overflow-x: hidden; /* Elimina la barra de desplazamiento horizontal */
+  overflow-x: hidden;
 }
 
-/* Ajustar la alineación y el margen del contenido */
 .container-fluid {
-  width: 100%; /* Ocupar todo el ancho de la pantalla */
-  padding: 0;
+  width: 100%;
+  padding: 10px;
   margin: 0;
 }
 
-/* Ajusta el contenido debajo del Header */
-
 .main-content {
-  width: 100vw; /* Ocupa todo el ancho de la pantalla */
-  padding-top: 100px; /* Ajustar según la altura del header */
+  width: 100vw;
+  padding-top: 100px;
 }
 
-
-/* Estilos del logo */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -41,7 +35,6 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-/* Animación del logo */
 @keyframes logo-spin {
   from {
       transform: rotate(0deg);
@@ -51,21 +44,18 @@
   }
 }
 
-/* Aplicar animación solo cuando no haya reducción de movimiento */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
       animation: logo-spin infinite 20s linear;
   }
 }
 
-/* Tarjetas */
 .card {
   padding: 2em;
   border-radius: 10px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo de texto adicional */
 .read-the-docs {
   color: #888;
 }
