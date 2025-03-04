@@ -10,6 +10,7 @@ function Cart({ usuario }) {
     const [showModal, setShowModal] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showAlert, setShowAlert] = useState(false); // Para mostrar la alerta si intenta comprar sin iniciar sesión
+    const [showThankYou, setShowThankYou] = useState(false); // Para mostrar la pantalla de agradecimiento
     const [formData, setFormData] = useState({ nombre: "", email: "", direccion: "" });
     const navigate = useNavigate();
 
@@ -48,7 +49,7 @@ function Cart({ usuario }) {
             alert(`Pedido realizado con éxito. ID: ${pedidoId}`);
             vaciarCarrito();
             setShowForm(false);
-            navigate(`/pedidos/${pedidoId}`); // 🔹 Redirige a la página de detalles del pedido
+            setShowThankYou(true); // Cambiar a la pantalla de agradecimiento
         } else {
             alert("Hubo un error al realizar tu pedido. Inténtalo de nuevo.");
         }
@@ -58,11 +59,24 @@ function Cart({ usuario }) {
         eliminarItemCarrito(index);  // Llamar a la función que elimina el item desde el contexto
     };
 
+    const handleNewOrder = () => {
+        navigate("/"); // Redirigir al inicio
+    };
+
     return (
         <Container className="mt-5 mb-5">
             <h1 className="text-center mb-4" style={{ fontSize: "2.5rem" }}>Carrito de compra</h1>
 
-            {cart.length === 0 ? (
+            {showThankYou ? (
+                // Pantalla de agradecimiento
+                <Card className="text-center p-5 mx-auto shadow-lg" style={{ maxWidth: "600px", minHeight: "300px", display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "80px" }}>
+                    <Card.Body>
+                        <h2 className="mb-4">¡Gracias por tu compra!</h2>
+                        <p className="fs-4">Tu pedido ha sido realizado con éxito.</p>
+                        <Button variant="primary" size="lg" className="px-5 py-3 fw-bold" onClick={handleNewOrder}>REALIZAR UN NUEVO PEDIDO</Button>
+                    </Card.Body>
+                </Card>
+            ) : cart.length === 0 ? (
                 <Card className="text-center p-5 mx-auto shadow-lg" style={{ maxWidth: "600px", minHeight: "300px", display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "80px" }}>
                     <FaShoppingCart size={100} className="text-dark mb-4" />
                     <Card.Body>
