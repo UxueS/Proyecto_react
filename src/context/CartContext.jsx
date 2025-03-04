@@ -24,12 +24,18 @@ export const CartProvider = ({ children }) => {
         }
     };
 
+    // Función para eliminar un producto del carrito
+    const eliminarItemCarrito = (index) => {
+        setCart(prevCart => prevCart.filter((_, i) => i !== index)); // Eliminar por índice
+    };
+
+    // Función para vaciar el carrito
     const vaciarCarrito = () => {
         setCart([]);
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, vaciarCarrito }}>
+        <CartContext.Provider value={{ cart, addToCart, eliminarItemCarrito, vaciarCarrito }}>
             {children}
         </CartContext.Provider>
     );

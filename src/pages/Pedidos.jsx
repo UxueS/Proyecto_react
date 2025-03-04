@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { obtenerPedidosUsuario } from "../services/PedidosService";
+import { useEffect, useState } from "react"; 
+import { obtenerPedidosUsuario, borrarPedido } from "../services/PedidosService";
 import { Container, Table, Alert, Modal, Button, Card } from "react-bootstrap";
 
 function Pedidos({ usuario }) {
@@ -28,6 +28,20 @@ function Pedidos({ usuario }) {
         setShowModal(true);
     };
 
+    // Función para eliminar un pedido
+    const handleEliminarPedido = async (pedidoId) => {
+        try {
+            const confirmacion = window.confirm("¿Estás seguro de que deseas borrar este pedido?");
+            if (confirmacion) {
+                await borrarPedido(pedidoId);  // Llamar al servicio para borrar el pedido
+                setPedidos(pedidos.filter(pedido => pedido.id !== pedidoId));  // Actualizar el estado
+                alert("Pedido eliminado con éxito.");
+            }
+        } catch (error) {
+            alert("Hubo un error al borrar el pedido. Inténtalo de nuevo.");
+        }
+    };
+
     return (
         <Container className="mt-5 mb-5">
             <h1 className="text-center mb-4" style={{ fontSize: "2.5rem" }}>Mis pedidos</h1>
@@ -45,6 +59,7 @@ function Pedidos({ usuario }) {
                             <th>Fecha del pedido</th>
                             <th>Total</th>
                             <th>Ver más</th>
+                            <th>Acciones</th> {/* Columna para las acciones */}
                         </tr>
                     </thead>
                     <tbody>
@@ -53,6 +68,11 @@ function Pedidos({ usuario }) {
                                 <td>{new Date(pedido.fecha).toLocaleString()}</td>
                                 <td>{pedido.total.toFixed(2)} €</td>
                                 <td><Button variant="info" size="sm">🔍 Ver más</Button></td>
+                                <td>
+                                    <Button variant="danger" size="sm" onClick={() => handleEliminarPedido(pedido.id)}>
+                                        🗑️ Eliminar
+                                    </Button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

@@ -1,5 +1,5 @@
 import { db } from "./firebaseConfig";
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where, doc, deleteDoc } from "firebase/firestore";
 
 // Función para guardar un pedido en Firestore y devolver su ID
 export const guardarPedido = async (pedido) => {
@@ -27,6 +27,23 @@ export const guardarPedido = async (pedido) => {
     } catch (error) {
         console.error("Error al guardar el pedido en Firestore:", error);
         return null;
+    }
+};
+
+// Función para borrar un pedido
+export const borrarPedido = async (pedidoId) => {
+    try {
+        // Referencia al documento que queremos eliminar
+        const pedidoRef = doc(db, "pedidos", pedidoId);
+        
+        // Eliminar el documento de Firestore
+        await deleteDoc(pedidoRef);
+
+        console.log("Pedido eliminado con éxito:", pedidoId);
+        return true;  // Si todo va bien, devolvemos true
+    } catch (error) {
+        console.error("Error al borrar el pedido:", error);
+        throw new Error("No se pudo borrar el pedido.");
     }
 };
 

@@ -6,7 +6,7 @@ import { guardarPedido } from "../services/PedidosService";
 import { useNavigate } from "react-router-dom";
 
 function Cart({ usuario }) {
-    const { cart, vaciarCarrito } = useContext(CartContext);
+    const { cart, vaciarCarrito, eliminarItemCarrito } = useContext(CartContext);  // Asegúrate de que `eliminarItemCarrito` esté definido en CartContext
     const [showModal, setShowModal] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showAlert, setShowAlert] = useState(false); // Para mostrar la alerta si intenta comprar sin iniciar sesión
@@ -24,7 +24,7 @@ function Cart({ usuario }) {
             setShowAlert(true);
             return;
         }
-    
+
         console.log("Usuario autenticado:", usuario);
 
         const pedido = {
@@ -53,7 +53,10 @@ function Cart({ usuario }) {
             alert("Hubo un error al realizar tu pedido. Inténtalo de nuevo.");
         }
     };
-    
+
+    const eliminarItem = (index) => {
+        eliminarItemCarrito(index);  // Llamar a la función que elimina el item desde el contexto
+    };
 
     return (
         <Container className="mt-5 mb-5">
@@ -75,6 +78,7 @@ function Cart({ usuario }) {
                                 <th style={{ minWidth: "200px", padding: "15px" }}>Cantidad</th>
                                 <th style={{ minWidth: "250px", padding: "15px" }}>Precio Unitario</th>
                                 <th style={{ minWidth: "250px", padding: "15px" }}>Total</th>
+                                <th style={{ padding: "15px" }}>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,6 +88,16 @@ function Cart({ usuario }) {
                                     <td style={{ padding: "12px" }}>{item.cantidad || 0}</td>
                                     <td style={{ padding: "12px" }}>{item.precio ? `${parseFloat(item.precio).toFixed(2)} €` : "0.00 €"}</td>
                                     <td style={{ padding: "12px" }}>{item.precio ? `${(parseFloat(item.precio) * item.cantidad).toFixed(2)} €` : "0.00 €"}</td>
+                                    <td style={{ padding: "12px" }}>
+                                        <Button 
+                                            variant="danger" 
+                                            size="sm" 
+                                            onClick={() => eliminarItem(index)} 
+                                            style={{ fontSize: "1rem" }}
+                                        >
+                                            🗑️
+                                        </Button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -174,12 +188,11 @@ function Cart({ usuario }) {
                     </Form.Group>
                 </Form>
 
-
-                    {showAlert && (
-                        <Alert variant="danger" className="mt-3">
-                            Debes iniciar sesión para realizar un pedido.
-                        </Alert>
-                    )}
+                {showAlert && (
+                    <Alert variant="danger" className="mt-3">
+                        Debes iniciar sesión para realizar un pedido.
+                    </Alert>
+                )}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowForm(false)}>Cancelar</Button>
