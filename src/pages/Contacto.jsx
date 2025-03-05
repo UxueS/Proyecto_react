@@ -17,9 +17,9 @@ const Contacto = () => {
                             <ListGroup variant="flush">
                                 {/* Propietarios */}
                                 <ListGroup.Item className="border-0 p-1">
-                                    <h5 className="mb-1" style={{ color: '#12285f', fontSize: '1rem' }}>Propietarios:</h5>
+                                    <h5 className="mb-1" style={{ color: '#12285f', fontSize: '1rem' }}>Propietarias:</h5>
                                     <p style={{ fontSize: '0.9rem', marginBottom: '0.2rem' }}><strong>Aida Mateo</strong> - Fundadora y CEO</p>
-                                    <p style={{ fontSize: '0.9rem', marginBottom: '0.2rem' }}><strong>Uxue San Miguel</strong> - Co-fundadora y Directora de Ventas</p>
+                                    <p style={{ fontSize: '0.9rem', marginBottom: '0.2rem' }}><strong>Uxue San Miguel</strong> - Co-fundadora y Directora de ventas</p>
                                 </ListGroup.Item>
 
                                 {/* Dirección */}
@@ -30,7 +30,7 @@ const Contacto = () => {
 
                                 {/* Correo electrónico */}
                                 <ListGroup.Item className="border-0 p-1">
-                                    <h5 className="mb-1" style={{ color: '#12285f', fontSize: '1rem' }}>Correo Electrónico:</h5>
+                                    <h5 className="mb-1" style={{ color: '#12285f', fontSize: '1rem' }}>Correo electrónico:</h5>
                                     <p style={{ fontSize: '0.9rem' }}><a href="mailto:contacto@papeleriatrazo.com" style={{ color: '#12285f', textDecoration: 'none', fontWeight: '500' }}>contacto@papeleriatrazo.com</a></p>
                                 </ListGroup.Item>
 
@@ -42,19 +42,19 @@ const Contacto = () => {
 
                                 {/* Redes sociales */}
                                 <ListGroup.Item className="border-0 text-center p-1">
-                                    <h5 className="mb-2" style={{ color: '#12285f', fontSize: '1rem' }}>Redes Sociales:</h5>
+                                    <h5 className="mb-2" style={{ color: '#12285f', fontSize: '1rem' }}>Redes sociales:</h5>
                                     <div className="d-flex justify-content-center gap-2">
                                         <Button variant="outline-primary" className="d-flex align-items-center" style={{ fontSize: '0.7rem', padding: '0.3rem 0.6rem' }} disabled>
                                             <FaFacebook size={16} className="me-2" />
-                                            <span>@PapeleriaTrazos</span>
+                                            <span>@papeleriatrazos</span>
                                         </Button>
                                         <Button variant="outline-info" className="d-flex align-items-center" style={{ fontSize: '0.7rem', padding: '0.3rem 0.6rem' }} disabled>
                                             <FaInstagram size={16} className="me-2" />
-                                            <span>@PapeleriaTrazos</span>
+                                            <span>@papeleriatrazos</span>
                                         </Button>
                                         <Button variant="outline-success" className="d-flex align-items-center" style={{ fontSize: '0.7rem', padding: '0.3rem 0.6rem' }} disabled>
                                             <FaTwitter size={16} className="me-2" />
-                                            <span>@PapeleriaTrazos</span>
+                                            <span>@papeleriatrazos</span>
                                         </Button>
                                     </div>
                                 </ListGroup.Item>

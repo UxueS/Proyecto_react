@@ -19,20 +19,17 @@ function Header({ login, loginData, actualizarLogin }) {
             <nav className="nav">
                 <ul>
                     <li><Link to="/">Inicio</Link></li>
-                    <li><Link to="/pedidos">Mis pedidos</Link></li>
                     <li><Link to="/contacto">Contacto</Link></li>
-                    <li><Link to="/cesta">Mi Cesta</Link></li>
-                    
+                    <li><Link to="/cesta">Mi cesta</Link></li>
+                    <li><Link to="/pedidos">Mis pedidos</Link></li>
                     {login ? (
-                        <li className="user-info">
-                            <span style={{ color: "#12285f", fontWeight: "bold" }}>Hola, {loginData.email.split('@')[0]}</span>
+                        <li className="user-box">
+                            <span className="user-text">Hola, {loginData.email.split('@')[0]}</span>
                             <button onClick={handleLogout} className="logout-btn">Logout</button>
                         </li>
                     ) : (
                         <li><Link to="/login">Login</Link></li>
                     )}
-
-
                 </ul>
             </nav>
         </header>
