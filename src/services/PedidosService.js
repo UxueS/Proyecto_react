@@ -8,8 +8,6 @@ export const guardarPedido = async (pedido) => {
             throw new Error("Faltan datos obligatorios para guardar el pedido.");
         }
 
-        console.log("Intentando guardar pedido en Firestore:", pedido); // Verificar datos antes de enviar
-
         const docRef = await addDoc(collection(db, "pedidos"), {
             userId: pedido.userId, // Email del usuario autenticado
             destinatario: {
@@ -22,7 +20,6 @@ export const guardarPedido = async (pedido) => {
             fecha: new Date().toISOString(),
         });
 
-        console.log("Pedido guardado con ID:", docRef.id);
         return docRef.id; // Devuelve el ID del pedido creado
     } catch (error) {
         console.error("Error al guardar el pedido en Firestore:", error);
@@ -33,13 +30,12 @@ export const guardarPedido = async (pedido) => {
 // Función para borrar un pedido
 export const borrarPedido = async (pedidoId) => {
     try {
-        // Referencia al documento que queremos eliminar
+        // Referencia al pedido que queremos eliminar
         const pedidoRef = doc(db, "pedidos", pedidoId);
         
-        // Eliminar el documento de Firestore
+        // Eliminar el pedido de Firestore
         await deleteDoc(pedidoRef);
 
-        console.log("Pedido eliminado con éxito:", pedidoId);
         return true;  // Si todo va bien, devolvemos true
     } catch (error) {
         console.error("Error al borrar el pedido:", error);
@@ -47,17 +43,15 @@ export const borrarPedido = async (pedidoId) => {
     }
 };
 
-// Función corregida para obtener los pedidos del usuario autenticado
+// Función para obtener los pedidos del usuario autenticado
 export const obtenerPedidosUsuario = async (userEmail) => {
     try {
         if (!userEmail) {
             throw new Error("No hay usuario autenticado.");
         }
 
-        console.log("Buscando pedidos para el usuario:", userEmail); // Verificar qué email se está pasando
-
         const pedidosRef = collection(db, "pedidos");
-        const q = query(pedidosRef, where("userId", "==", userEmail)); // Corregido: buscar por `userId`
+        const q = query(pedidosRef, where("userId", "==", userEmail));
         const querySnapshot = await getDocs(q);
         
         let pedidos = [];

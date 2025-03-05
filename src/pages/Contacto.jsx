@@ -34,13 +34,13 @@ const Contacto = () => {
                                     <p style={{ fontSize: '0.9rem' }}><a href="mailto:contacto@papeleriatrazo.com" style={{ color: '#12285f', textDecoration: 'none', fontWeight: '500' }}>contacto@papeleriatrazo.com</a></p>
                                 </ListGroup.Item>
 
-                                {/* Teléfono (solo texto, no enlace) */}
+                                {/* Teléfono (solo texto) */}
                                 <ListGroup.Item className="border-0 p-1">
                                     <h5 className="mb-1" style={{ color: '#12285f', fontSize: '1rem' }}>Teléfono:</h5>
                                     <p style={{ fontSize: '0.9rem' }}>948 123 456</p>
                                 </ListGroup.Item>
 
-                                {/* Redes Sociales */}
+                                {/* Redes sociales */}
                                 <ListGroup.Item className="border-0 text-center p-1">
                                     <h5 className="mb-2" style={{ color: '#12285f', fontSize: '1rem' }}>Redes Sociales:</h5>
                                     <div className="d-flex justify-content-center gap-2">

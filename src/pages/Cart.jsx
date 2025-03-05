@@ -6,7 +6,7 @@ import { guardarPedido } from "../services/PedidosService";
 import { useNavigate } from "react-router-dom";
 
 function Cart({ usuario }) {
-    const { cart, vaciarCarrito, eliminarItemCarrito } = useContext(CartContext);  // Asegúrate de que `eliminarItemCarrito` esté definido en CartContext
+    const { cart, vaciarCarrito, eliminarItemCarrito } = useContext(CartContext);  
     const [showModal, setShowModal] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showAlert, setShowAlert] = useState(false); // Para mostrar la alerta si intenta comprar sin iniciar sesión
@@ -37,12 +37,12 @@ function Cart({ usuario }) {
                 nombre: item.nombre.trim(),
                 cantidad: item.cantidad,
                 precio: parseFloat(item.precio)
-            })), // 🔹 Convertimos `cart` en un array de objetos correctamente formateados
+            })), // Convertimos `cart` en un array de objetos correctamente formateados
             total: totalCompra,
             fecha: new Date().toISOString()
         };
 
-        console.log("Pedido a enviar:", pedido); // 📌 Verifica que los datos sean correctos antes de enviarlos
+        console.log("Pedido a enviar:", pedido); 
         
         const pedidoId = await guardarPedido(pedido);
         if (pedidoId) {

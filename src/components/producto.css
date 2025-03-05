@@ -1,16 +1,14 @@
-/* Contenedor de la lista de productos */
 .productos-container {
-    width: 100vw; /* Asegura que los productos ocupen todo el ancho */
+    width: 100vw; 
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0 10px;
 }
 
-/* Contenedor principal del producto */
 .producto {
-    width: 100%; /* Producto ocupa todo el ancho */
-    max-width: 1200px; /* Controla el ancho en pantallas grandes */
+    width: 100%; 
+    max-width: 1200px; 
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -22,7 +20,6 @@
     margin-bottom: 20px;
 }
 
-/* Asegurar que los elementos dentro de cada producto estén alineados */
 .producto .row {
     display: flex;
     align-items: center;
@@ -30,39 +27,33 @@
     width: 100%;
 }
 
-/* Imagen del producto */
 .producto-imagen {
     width: 80px;
     height: 80px;
     object-fit: contain;
 }
 
-/* Información del producto */
 .producto-info {
-    flex: 1; /* Hace que el contenido se ajuste dinámicamente */
+    flex: 1; 
     padding: 0 15px;
 }
 
-/* Nombre del producto */
 .producto-nombre {
     font-size: 18px;
     font-weight: bold;
 }
 
-/* Precio del producto */
 .producto-precio {
     color: green;
     font-size: 16px;
     font-weight: bold;
 }
 
-/* Contenedor del botón */
 .producto-boton-container {
     display: flex;
     justify-content: center;
 }
 
-/* Botón "Más info" */
 .producto-boton {
     font-size: 14px;
     font-weight: bold;
@@ -74,43 +65,35 @@
     white-space: nowrap;
 }
 
-/* Efecto hover en el botón */
 .producto-boton:hover {
     background-color: #e0a800;
 }
 
-/* Estilo del modal de Bootstrap */
 .modal-content {
     border-radius: 10px;
     padding: 20px;
 }
 
-/* Título del modal */
 .modal-title {
     font-size: 22px;
     font-weight: bold;
 }
 
-/* Cuerpo del modal */
 .modal-body {
     font-size: 16px;
     color: #555;
 }
 
-/* Pie del modal */
 .modal-footer button {
     font-size: 14px;
 }
 
-
-/* Contenedor de la cantidad */
 .cantidad-container {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Botones de + y - */
 .cantidad-boton {
     font-size: 18px;
     font-weight: bold;
@@ -119,7 +102,6 @@
     min-width: 40px;
 }
 
-/* Texto de cantidad */
 .cantidad-texto {
     font-size: 18px;
     font-weight: bold;
@@ -127,7 +109,6 @@
     text-align: center;
 }
 
-/* Botón "Añadir al carro" */
 .carrito-boton {
     font-size: 16px;
     font-weight: bold;

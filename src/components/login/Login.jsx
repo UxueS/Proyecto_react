@@ -7,7 +7,7 @@ import "./login.css";
 function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isRegistering, setIsRegistering] = useState(false); // 🔄 Alternar entre login y registro
+    const [isRegistering, setIsRegistering] = useState(false); // Alternar entre login y registro
     const navigate = useNavigate();
 
     const submitHandler = (event) => {
@@ -32,7 +32,7 @@ function Login(props) {
                     alert("Login correcto");
                     console.log(response);
                     props.actualizarLogin(true, response.data);
-                    navigate("/"); // 🔄 Redirigir a la pantalla de inicio
+                    navigate("/"); // Redirigir a la pantalla de inicio
                 }
             })
             .catch((error) => {
