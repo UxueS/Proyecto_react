@@ -83,7 +83,7 @@ function Cart({ usuario }) {
     };
 
     const handleNewOrder = () => {
-        navigate("/"); // Redirigir al inicio
+        navigate("/productos"); // Redirigir al inicio
     };
 
     return (

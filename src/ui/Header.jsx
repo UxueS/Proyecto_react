@@ -19,6 +19,7 @@ function Header({ login, loginData, actualizarLogin }) {
             <nav className="nav">
                 <ul>
                     <li><Link to="/">Inicio</Link></li>
+                    <li><Link to="/productos">Productos</Link></li>
                     <li><Link to="/contacto">Contacto</Link></li>
                     <li><Link to="/cesta">Mi cesta</Link></li>
                     <li><Link to="/pedidos">Mis pedidos</Link></li>

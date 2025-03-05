@@ -26,9 +26,9 @@ function App() {
         <div className="App">
             <Header className="header" login={login} loginData={loginData} actualizarLogin={actualizarLogin} />
             <div className="main-content">
-                {location.pathname === "/" && <h2>Escoge tus artículos favoritos</h2>}
+                {location.pathname === "/productos" && <h2>Escoge tus artículos favoritos</h2>}
                 <Routes>
-                    <Route path="/" element={<Productos />} />
+                    <Route path="/productos" element={<Productos />} />
                     <Route path="/cesta" element={<Cesta usuario={loginData} />} />
                     <Route path="/contacto" element={<Contacto />} />
                     <Route path="/login" element={<Login actualizarLogin={actualizarLogin} />} />
