@@ -59,3 +59,42 @@
 .read-the-docs {
   color: #888;
 }
+
+.welcome-container {
+  text-align: center;
+  margin-top: 100px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.welcome-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #12285f;
+}
+
+.welcome-text {
+  font-size: 1.3rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* 🎬 Ajustes de la animación */
+.saludo-animation {
+  width: 250px;
+  margin: 20px auto;
+}
+
+.explore-button {
+  background-color: #12285f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.explore-button:hover {
+  background-color: #0d1f4a;
+}
