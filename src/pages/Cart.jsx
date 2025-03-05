@@ -4,6 +4,7 @@ import { Container, Table, Card, Button, Modal, Form, Alert } from "react-bootst
 import { FaShoppingCart } from "react-icons/fa";
 import { guardarPedido } from "../services/PedidosService";
 import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
 
 function Cart({ usuario }) {
     const { cart, vaciarCarrito, eliminarItemCarrito } = useContext(CartContext);  
@@ -15,6 +16,27 @@ function Cart({ usuario }) {
     const navigate = useNavigate();
 
     const totalCompra = cart.reduce((total, item) => total + (parseFloat(item.precio) || 0) * item.cantidad, 0);
+
+    // Función para lanzar confeti durante 2 segundos
+    const lanzarConfeti = () => {
+        const duration = 2000; // ⏳ Duración del efecto (2s)
+        const end = Date.now() + duration;
+        
+        const frame = () => {
+            confetti({
+                particleCount: 7,
+                spread: 160,
+                origin: { y: 0.6 },
+            });
+
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        };
+        
+        frame();
+    };
+
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,6 +69,7 @@ function Cart({ usuario }) {
         const pedidoId = await guardarPedido(pedido);
         if (pedidoId) {
             alert(`Pedido realizado con éxito. ID: ${pedidoId}`);
+            lanzarConfeti();
             vaciarCarrito();
             setShowForm(false);
             setShowThankYou(true); // Cambiar a la pantalla de agradecimiento
@@ -149,7 +172,7 @@ function Cart({ usuario }) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
-                    <Button variant="primary" className="fw-bold" onClick={() => { setShowModal(false); setShowForm(true); }}>
+                    <Button variant="primary" onClick={() => { setShowModal(false); setShowForm(true); }}>
                         Continuar
                     </Button>
                 </Modal.Footer>

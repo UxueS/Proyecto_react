@@ -4,7 +4,7 @@
   align-items: center;
   width: 100vw;
   height: 5rem;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   background: linear-gradient(135deg, #a8c4e6, #3f72af);
