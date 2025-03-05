@@ -24,13 +24,15 @@ function Header({ login, loginData, actualizarLogin }) {
                     <li><Link to="/cesta">Mi Cesta</Link></li>
                     
                     {login ? (
-                        <li>
-                            Hola, {loginData.email.split('@')[0]}    
+                        <li className="user-info">
+                            <span style={{ color: "#12285f", fontWeight: "bold" }}>Hola, {loginData.email.split('@')[0]}</span>
                             <button onClick={handleLogout} className="logout-btn">Logout</button>
                         </li>
                     ) : (
                         <li><Link to="/login">Login</Link></li>
                     )}
+
+
                 </ul>
             </nav>
         </header>
