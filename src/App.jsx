@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Route, Routes, useLocation, useNavigate, Navigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import Lottie from "lottie-react";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 import Productos from "./components/Productos";
@@ -7,13 +9,11 @@ import Cesta from "./pages/Cart";
 import Contacto from "./pages/Contacto";
 import Login from "./components/login/Login";
 import Pedidos from "./pages/Pedidos";
+import saludo from "./components/saludo.json"; // Animación Lottie
 import "./components/producto.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./App.css";
-import { motion } from "framer-motion";
-import Lottie from "lottie-react";
-import saludo from "./components/saludo.json";  // Animación de monigote
 
 function App() {
     const location = useLocation();
@@ -32,6 +32,7 @@ function App() {
     return (
         <div className="App">
             <Header className="header" login={login} loginData={loginData} actualizarLogin={actualizarLogin} />
+
             <div className="main-content">
                 {location.pathname === "/" && (
                     <motion.div
@@ -43,7 +44,18 @@ function App() {
                         <h1 className="welcome-title">¡Bienvenido a Papelería Trazos! 👋</h1>
                         <p className="welcome-text">Explora nuestro catálogo y encuentra todo lo que necesitas.</p>
 
-                        {/* 🎬 Animación Lottie del monigote */}
+                        {/* 📢 Banner Promocional ENCIMA del monigote */}
+                        <motion.div
+                            className="promo-banner"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1 }}
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            🎉 ¡Este mes <span>3x2</span> en todos nuestros productos! 🎉
+                        </motion.div>
+
+                        {/* 🎬 Animación Lottie */}
                         <Lottie animationData={saludo} className="saludo-animation" loop autoplay />
 
                         <motion.button

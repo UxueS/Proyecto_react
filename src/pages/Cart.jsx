@@ -4,39 +4,47 @@ import { Container, Table, Card, Button, Modal, Form, Alert } from "react-bootst
 import { FaShoppingCart } from "react-icons/fa";
 import { guardarPedido } from "../services/PedidosService";
 import { useNavigate } from "react-router-dom";
-import confetti from "canvas-confetti";
 
 function Cart({ usuario }) {
     const { cart, vaciarCarrito, eliminarItemCarrito } = useContext(CartContext);  
     const [showModal, setShowModal] = useState(false);
     const [showForm, setShowForm] = useState(false);
-    const [showAlert, setShowAlert] = useState(false); // Para mostrar la alerta si intenta comprar sin iniciar sesión
-    const [showThankYou, setShowThankYou] = useState(false); // Para mostrar la pantalla de agradecimiento
+    const [showAlert, setShowAlert] = useState(false);
+    const [showThankYou, setShowThankYou] = useState(false);
     const [formData, setFormData] = useState({ nombre: "", email: "", direccion: "" });
+    const [ofertaAplicada, setOfertaAplicada] = useState(false);
+    const [descuento, setDescuento] = useState(0); // Dinero descontado por la oferta
     const navigate = useNavigate();
 
-    const totalCompra = cart.reduce((total, item) => total + (parseFloat(item.precio) || 0) * item.cantidad, 0);
+    // Calcular el total de productos en el carrito
+    const totalCantidadProductos = cart.reduce((total, item) => total + (item.cantidad || 0), 0);
 
-    // Función para lanzar confeti durante 2 segundos
-    const lanzarConfeti = () => {
-        const duration = 2000; // ⏳ Duración del efecto (2s)
-        const end = Date.now() + duration;
-        
-        const frame = () => {
-            confetti({
-                particleCount: 7,
-                spread: 160,
-                origin: { y: 0.6 },
-            });
+    // Calcular el total de la compra sin descuento
+    const totalSinDescuento = cart.reduce((total, item) => {
+        const precioUnitario = parseFloat(item.precio) || 0;
+        const cantidad = item.cantidad || 0;
+        return total + (precioUnitario * cantidad);
+    }, 0);
 
-            if (Date.now() < end) {
-                requestAnimationFrame(frame);
-            }
-        };
-        
-        frame();
-    };
+    // Calcular el total con descuento aplicado por la oferta "3x2"
+    const totalConDescuento = cart.reduce((total, item) => {
+        const precioUnitario = parseFloat(item.precio) || 0;
+        const cantidad = item.cantidad || 0;
 
+        const unidadesDescontadas = Math.floor(cantidad / 3);  // Cada 3 unidades, 1 gratis
+        const cantidadConDescuento = cantidad - unidadesDescontadas;
+
+        // Si la oferta no se ha aplicado, la aplicamos
+        if (unidadesDescontadas > 0 && !ofertaAplicada) {
+            setOfertaAplicada(true);
+            setDescuento(precioUnitario * unidadesDescontadas); // Guardamos el dinero descontado
+        }
+
+        return total + (precioUnitario * cantidadConDescuento);
+    }, 0);
+
+    // Calcular la diferencia entre el total sin descuento y el total con descuento
+    const diferenciaDescuento = totalSinDescuento - totalConDescuento;
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,8 +56,6 @@ function Cart({ usuario }) {
             return;
         }
 
-        console.log("Usuario autenticado:", usuario);
-
         const pedido = {
             userId: usuario.email, 
             destinatarioNombre: formData.nombre.trim(),
@@ -59,39 +65,38 @@ function Cart({ usuario }) {
                 nombre: item.nombre.trim(),
                 cantidad: item.cantidad,
                 precio: parseFloat(item.precio)
-            })), // Convertimos `cart` en un array de objetos correctamente formateados
-            total: totalCompra,
+            })),
+            total: totalConDescuento,
             fecha: new Date().toISOString()
         };
 
-        console.log("Pedido a enviar:", pedido); 
-        
         const pedidoId = await guardarPedido(pedido);
         if (pedidoId) {
             alert(`Pedido realizado con éxito. ID: ${pedidoId}`);
-            lanzarConfeti();
             vaciarCarrito();
             setShowForm(false);
-            setShowThankYou(true); // Cambiar a la pantalla de agradecimiento
+            setShowThankYou(true);
         } else {
             alert("Hubo un error al realizar tu pedido. Inténtalo de nuevo.");
         }
     };
 
     const eliminarItem = (index) => {
-        eliminarItemCarrito(index);  // Llamar a la función que elimina el item desde el contexto
+        eliminarItemCarrito(index);
     };
 
     const handleNewOrder = () => {
-        navigate("/productos"); // Redirigir al inicio
+        navigate("/productos");
     };
+
+    // Verificar si hay productos con más de 3 unidades
+    const tieneOferta3x2 = cart.some(item => item.cantidad >= 3);
 
     return (
         <Container className="mt-5 mb-5">
             <h1 className="text-center mb-4" style={{ fontSize: "2.5rem" }}>Carrito de compra</h1>
 
             {showThankYou ? (
-                // Pantalla de agradecimiento
                 <Card className="text-center p-5 mx-auto shadow-lg" style={{ maxWidth: "600px", minHeight: "300px", display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "80px" }}>
                     <Card.Body>
                         <h2 className="mb-4">¡Gracias por tu compra!</h2>
@@ -124,14 +129,11 @@ function Cart({ usuario }) {
                                     <td style={{ padding: "12px" }}>{item.nombre.trim()}</td>
                                     <td style={{ padding: "12px" }}>{item.cantidad || 0}</td>
                                     <td style={{ padding: "12px" }}>{item.precio ? `${parseFloat(item.precio).toFixed(2)} €` : "0.00 €"}</td>
-                                    <td style={{ padding: "12px" }}>{item.precio ? `${(parseFloat(item.precio) * item.cantidad).toFixed(2)} €` : "0.00 €"}</td>
                                     <td style={{ padding: "12px" }}>
-                                        <Button 
-                                            variant="danger" 
-                                            size="sm" 
-                                            onClick={() => eliminarItem(index)} 
-                                            style={{ fontSize: "1rem" }}
-                                        >
+                                        {item.precio ? `${(parseFloat(item.precio) * item.cantidad).toFixed(2)} €` : "0.00 €"}
+                                    </td>
+                                    <td style={{ padding: "12px" }}>
+                                        <Button variant="danger" size="sm" onClick={() => eliminarItem(index)} style={{ fontSize: "1rem" }}>
                                             🗑️
                                         </Button>
                                     </td>
@@ -140,7 +142,27 @@ function Cart({ usuario }) {
                         </tbody>
                     </Table>
 
-                    <h3 className="text-end mt-3 fw-bold" style={{ fontSize: "1.8rem" }}>Total: {totalCompra.toFixed(2)} €</h3>
+                    {/* Caja de Totales */}
+                    <Card className="shadow-sm mt-4" style={{ fontSize: "1.2rem", borderRadius: "8px", padding: "20px", backgroundColor: "#f8f9fa", border: "1px solid #ddd" }}>
+                        <div className="d-flex justify-content-between">
+                            <h5>Total:</h5>
+                            <p className="mb-0">{totalSinDescuento.toFixed(2)} €</p>
+                        </div>
+
+                        {tieneOferta3x2 && diferenciaDescuento > 0 && (
+                            <div className="d-flex justify-content-between text-danger">
+                                <h5>Descuento 3x2:</h5>
+                                <p className="mb-0">-{diferenciaDescuento.toFixed(2)} €</p>
+                            </div>
+                        )}
+
+                        {tieneOferta3x2 ? (
+                            <div className="d-flex justify-content-between mt-3">
+                                <h5 className="fw-bold">Total con descuento:</h5>
+                                <p className="mb-0 fw-bold">{totalConDescuento.toFixed(2)} €</p>
+                            </div>
+                        ) : null}
+                    </Card>
 
                     <div className="text-center mt-5" style={{ marginBottom: "100px" }}>
                         <Button variant="success" size="lg" className="px-5 py-3 fw-bold shadow-lg rounded"
@@ -168,7 +190,13 @@ function Cart({ usuario }) {
                             </li>
                         ))}
                     </ul>
-                    <h4 className="fw-bold text-end mt-3">Total: {totalCompra.toFixed(2)} €</h4>
+                    <h4 className="fw-bold text-end mt-3">Total sin descuento: {totalSinDescuento.toFixed(2)} €</h4>
+                    {diferenciaDescuento > 0 && (
+                        <h4 className="fw-bold text-end mt-2 text-danger">
+                            Descuento: -{diferenciaDescuento.toFixed(2)} €
+                        </h4>
+                    )}
+                    <h4 className="fw-bold text-end mt-2">Total con descuento: {totalConDescuento.toFixed(2)} €</h4>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
@@ -184,52 +212,52 @@ function Cart({ usuario }) {
                     <Modal.Title>Información de envío</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <Form>
-                    <Form.Group>
-                        <Form.Label htmlFor="nombre">Nombre</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            id="nombre" 
-                            name="nombre" 
-                            value={formData.nombre} 
-                            onChange={handleInputChange} 
-                            required 
-                            autoComplete="name"
-                        />
-                    </Form.Group>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label htmlFor="nombre">Nombre</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                id="nombre" 
+                                name="nombre" 
+                                value={formData.nombre} 
+                                onChange={handleInputChange} 
+                                required 
+                                autoComplete="name"
+                            />
+                        </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label htmlFor="email">Email</Form.Label>
-                        <Form.Control 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            value={formData.email} 
-                            onChange={handleInputChange} 
-                            required 
-                            autoComplete="email"
-                        />
-                    </Form.Group>
+                        <Form.Group>
+                            <Form.Label htmlFor="email">Email</Form.Label>
+                            <Form.Control 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                value={formData.email} 
+                                onChange={handleInputChange} 
+                                required 
+                                autoComplete="email"
+                            />
+                        </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label htmlFor="direccion">Dirección de Envío</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            id="direccion" 
-                            name="direccion" 
-                            value={formData.direccion} 
-                            onChange={handleInputChange} 
-                            required 
-                            autoComplete="street-address"
-                        />
-                    </Form.Group>
-                </Form>
+                        <Form.Group>
+                            <Form.Label htmlFor="direccion">Dirección de Envío</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                id="direccion" 
+                                name="direccion" 
+                                value={formData.direccion} 
+                                onChange={handleInputChange} 
+                                required 
+                                autoComplete="street-address"
+                            />
+                        </Form.Group>
+                    </Form>
 
-                {showAlert && (
-                    <Alert variant="danger" className="mt-3">
-                        Debes iniciar sesión para realizar un pedido.
-                    </Alert>
-                )}
+                    {showAlert && (
+                        <Alert variant="danger" className="mt-3">
+                            Debes iniciar sesión para realizar un pedido.
+                        </Alert>
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowForm(false)}>Cancelar</Button>

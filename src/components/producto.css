@@ -124,4 +124,42 @@
 .carrito-boton:hover {
     background-color: #0056b3;
 }
+.best-seller {
+    position: relative;
+    border: 3px solid gold !important;
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
+    animation: glow 1.5s infinite alternate;
+}
+
+.best-seller-banner {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: gold;
+    color: black;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.7);
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.6);
+    }
+    100% {
+        box-shadow: 0px 0px 20px rgba(255, 215, 0, 1);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
 

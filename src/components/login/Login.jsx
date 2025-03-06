@@ -27,13 +27,13 @@ function Login(props) {
             .then((response) => {
                 if (isRegistering) {
                     alert("Registro exitoso. Ahora puedes iniciar sesión.");
-                    setIsRegistering(false); // Volver a la pantalla de login después del registro
+                    setIsRegistering(false); 
                 } else {
                     alert("Login correcto");
                     console.log(response);
-                    props.actualizarLogin(true); // Actualiza el estado de login
-                    props.actualizarLoginData(response.data); // Actualiza los datos de login
-                    navigate("/"); // Redirigir a la pantalla de inicio
+                    props.actualizarLogin(true); 
+                    props.actualizarLoginData(response.data); 
+                    navigate("/"); 
                 }
             })
             .catch((error) => {

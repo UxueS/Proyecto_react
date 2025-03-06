@@ -19,7 +19,8 @@
 .main-content {
   width: 100vw;
   padding-top: 100px;
-  margin-bottom: 100px; /* Separación adicional entre contenido y footer */
+  margin-bottom: 100px;
+  /* Separación adicional entre contenido y footer */
 }
 
 .logo {
@@ -38,16 +39,17 @@
 
 @keyframes logo-spin {
   from {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   to {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
-      animation: logo-spin infinite 20s linear;
+    animation: logo-spin infinite 20s linear;
   }
 }
 
@@ -94,7 +96,8 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin-bottom: 50px; /* Aumentar la separación con el footer */
+  margin-bottom: 20px;
+  /* Aumentar la separación con el footer */
 }
 
 .explore-button:hover {
@@ -104,6 +107,41 @@
 /* Footer */
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   background-color: #f1f1f1;
+}
+
+.promo-banner {
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  color: white;
+  text-align: center;
+  padding: 12px 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 12px;
+  margin: 15px auto;
+  width: 50%;
+  box-shadow: 0 0 15px rgba(255, 138, 0, 0.6);
+  animation: glow 1.5s infinite alternate;
+}
+
+.promo-banner span {
+  color: #ffea00;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(255, 138, 0, 0.5);
+  }
+
+  to {
+    box-shadow: 0 0 20px rgba(255, 234, 0, 0.8);
+  }
+}
+
+.saludo-animation {
+  width: 250px;
+  margin: 20px auto;
 }
