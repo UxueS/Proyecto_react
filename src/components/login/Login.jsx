@@ -31,12 +31,13 @@ function Login(props) {
                 } else {
                     alert("Login correcto");
                     console.log(response);
-                    props.actualizarLogin(true, response.data);
+                    props.actualizarLogin(true); // Actualiza el estado de login
+                    props.actualizarLoginData(response.data); // Actualiza los datos de login
                     navigate("/"); // Redirigir a la pantalla de inicio
                 }
             })
             .catch((error) => {
-                alert("Error: " + error.response.data.error.message);
+                alert("Error: " + error.response?.data?.error?.message || "Error desconocido");
                 console.log(error);
             });
     };

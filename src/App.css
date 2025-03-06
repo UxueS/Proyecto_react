@@ -19,6 +19,7 @@
 .main-content {
   width: 100vw;
   padding-top: 100px;
+  margin-bottom: 100px; /* Separación adicional entre contenido y footer */
 }
 
 .logo {
@@ -93,8 +94,16 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-bottom: 50px; /* Aumentar la separación con el footer */
 }
 
 .explore-button:hover {
   background-color: #0d1f4a;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f1f1f1;
 }
