@@ -89,7 +89,6 @@ function Cart({ usuario }) {
         navigate("/productos");
     };
 
-    // Verificar si hay productos con más de 3 unidades
     const tieneOferta3x2 = cart.some(item => item.cantidad >= 3);
 
     return (
@@ -142,7 +141,7 @@ function Cart({ usuario }) {
                         </tbody>
                     </Table>
 
-                    {/* Caja de Totales */}
+                    
                     <Card className="shadow-sm mt-4" style={{ fontSize: "1.2rem", borderRadius: "8px", padding: "20px", backgroundColor: "#f8f9fa", border: "1px solid #ddd" }}>
                         <div className="d-flex justify-content-between">
                             <h5>Total:</h5>
@@ -176,7 +175,7 @@ function Cart({ usuario }) {
                 </>
             )}
 
-            {/* Modal para confirmar los pedidos */}
+           
             <Modal show={showModal} onHide={() => setShowModal(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title className="fw-bold">Confirmación de pedido</Modal.Title>
@@ -206,7 +205,7 @@ function Cart({ usuario }) {
                 </Modal.Footer>
             </Modal>
 
-            {/* Formulario para la información del cliente */}
+          
             <Modal show={showForm} onHide={() => setShowForm(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Información de envío</Modal.Title>

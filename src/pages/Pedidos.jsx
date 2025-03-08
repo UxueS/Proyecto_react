@@ -29,7 +29,8 @@ function Pedidos({ usuario }) {
     };
 
     // Función para eliminar un pedido
-    const handleEliminarPedido = async (pedidoId) => {
+    const handleEliminarPedido = async (pedidoId, event) => {
+        event.stopPropagation();  // Detener la propagación del clic
         try {
             const confirmacion = window.confirm("¿Estás seguro de que deseas borrar este pedido?");
             if (confirmacion) {
@@ -59,7 +60,7 @@ function Pedidos({ usuario }) {
                             <th>Fecha del pedido</th>
                             <th>Total</th>
                             <th>Ver más</th>
-                            <th>Acciones</th> {/* Columna para las acciones */}
+                            <th>Acciones</th> 
                         </tr>
                     </thead>
                     <tbody>
@@ -69,7 +70,7 @@ function Pedidos({ usuario }) {
                                 <td>{pedido.total.toFixed(2)} €</td>
                                 <td><Button variant="info" size="sm">🔍 Ver más</Button></td>
                                 <td>
-                                    <Button variant="danger" size="sm" onClick={() => handleEliminarPedido(pedido.id)}>
+                                    <Button variant="danger" size="sm" onClick={(e) => handleEliminarPedido(pedido.id, e)}>
                                         🗑️ Eliminar
                                     </Button>
                                 </td>
@@ -79,7 +80,6 @@ function Pedidos({ usuario }) {
                 </Table>
             )}
 
-            {/* Modal para ver detalles del pedido */}
             <Modal show={showModal} onHide={() => setShowModal(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Detalles del pedido</Modal.Title>

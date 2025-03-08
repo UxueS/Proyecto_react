@@ -1,8 +1,57 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import { Button, Modal, Container, Row, Col } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
+
+const ParticleComponent = React.memo(({ particlesInit }) => (
+    <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+            fullScreen: false,
+            particles: {
+                number: { value: 200 }, 
+                shape: { type: "star" },
+                size: { value: { min: 1, max: 4 } },
+                move: {
+                    enable: true,
+                    speed: 0.3,
+                    direction: "top",
+                    random: true,
+                    straight: false,
+                    outModes: { default: "out" },
+                },
+                opacity: {
+                    value: { min: 0.5, max: 1 },
+                    animation: {
+                        enable: true,
+                        speed: 0.2,
+                        minimumValue: 0.3,
+                        sync: false,
+                    },
+                },
+                color: { value: ["#FFD700", "#FFFACD", "#FFA500"] },
+            },
+            interactivity: {
+                events: {
+                    onHover: { enable: false },
+                    onClick: { enable: false },
+                },
+            },
+            detectRetina: true,
+        }}
+        style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 0,
+            pointerEvents: "none",
+        }}
+    />
+));
 
 function Producto({ nombre, imagen, precio, descripcion }) {
     const [show, setShow] = useState(false);
@@ -22,60 +71,15 @@ function Producto({ nombre, imagen, precio, descripcion }) {
         setCantidad(0);
     };
 
-    const particlesInit = async (engine) => {
+    const particlesInit = useCallback(async (engine) => {
         await loadSlim(engine);
-    };
+    }, []);
 
     return (
         <Container fluid className="producto-container" style={{ position: "relative", marginBottom: "20px", padding: "15px", border: "1px solid #ddd", borderRadius: "10px", boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.1)" }}>
             {nombre === "Goma de borrar" && (
                 <>
-                    <Particles
-                        id="tsparticles"
-                        init={particlesInit}
-                        options={{
-                            fullScreen: false,
-                            particles: {
-                                number: { value: 200 }, // Más estrellas
-                                shape: { type: "star" },
-                                size: { value: { min: 1, max: 4 } },
-                                move: {
-                                    enable: true,
-                                    speed: 0.3,
-                                    direction: "top",
-                                    random: true,
-                                    straight: false,
-                                    outModes: { default: "out" },
-                                },
-                                opacity: {
-                                    value: { min: 0.5, max: 1 },
-                                    animation: {
-                                        enable: true,
-                                        speed: 0.2,
-                                        minimumValue: 0.3,
-                                        sync: false,
-                                    },
-                                },
-                                color: { value: ["#FFD700", "#FFFACD", "#FFA500"] },
-                            },
-                            interactivity: {
-                                events: {
-                                    onHover: { enable: false },
-                                    onClick: { enable: false },
-                                },
-                            },
-                            detectRetina: true,
-                        }}
-                        style={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            width: "100%",
-                            height: "100%",
-                            zIndex: 0,
-                            pointerEvents: "none",
-                        }}
-                    />
+                    <ParticleComponent particlesInit={particlesInit} />
                     <div
                         style={{
                             position: "absolute",

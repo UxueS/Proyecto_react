@@ -6,8 +6,8 @@ function Header({ login, loginData, actualizarLogin }) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        actualizarLogin(false, {}); // Cerrar sesión
-        navigate("/"); // Redirigir a inicio
+        actualizarLogin(false, {}); 
+        navigate("/"); 
     };
 
     return (

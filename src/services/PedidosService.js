@@ -9,18 +9,18 @@ export const guardarPedido = async (pedido) => {
         }
 
         const docRef = await addDoc(collection(db, "pedidos"), {
-            userId: pedido.userId, // Email del usuario autenticado
+            userId: pedido.userId, 
             destinatario: {
                 nombre: pedido.destinatarioNombre,
                 email: pedido.destinatarioEmail,
                 direccion: pedido.destinatarioDireccion,
             },
-            productos: pedido.productos, // Lista de productos comprados
+            productos: pedido.productos, 
             total: pedido.total,
             fecha: new Date().toISOString(),
         });
 
-        return docRef.id; // Devuelve el ID del pedido creado
+        return docRef.id; 
     } catch (error) {
         console.error("Error al guardar el pedido en Firestore:", error);
         return null;
@@ -30,13 +30,13 @@ export const guardarPedido = async (pedido) => {
 // Función para borrar un pedido
 export const borrarPedido = async (pedidoId) => {
     try {
-        // Referencia al pedido que queremos eliminar
+        
         const pedidoRef = doc(db, "pedidos", pedidoId);
         
-        // Eliminar el pedido de Firestore
+        
         await deleteDoc(pedidoRef);
 
-        return true;  // Si todo va bien, devolvemos true
+        return true;  
     } catch (error) {
         console.error("Error al borrar el pedido:", error);
         throw new Error("No se pudo borrar el pedido.");

@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./login.css";
 
 function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isRegistering, setIsRegistering] = useState(false); // Alternar entre login y registro
+    const [isRegistering, setIsRegistering] = useState(false); 
     const navigate = useNavigate();
+    const location = useLocation();
+    const redirectPath = new URLSearchParams(location.search).get("redirect") || "/";
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -33,7 +35,7 @@ function Login(props) {
                     console.log(response);
                     props.actualizarLogin(true); 
                     props.actualizarLoginData(response.data); 
-                    navigate("/"); 
+                    navigate(redirectPath); 
                 }
             })
             .catch((error) => {
