@@ -2,13 +2,15 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 
-function Header({ login, loginData, actualizarLogin }) {
+function Header({ login, loginData, actualizarLogin, actualizarLoginData }) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        actualizarLogin(false, {}); 
-        navigate("/"); 
+        actualizarLogin(false);        // Indicas que ya no está logueado.
+        actualizarLoginData(null);     // Borras los datos del usuario explícitamente.
+        navigate("/");
     };
+    
 
     return (
         <header className="header">

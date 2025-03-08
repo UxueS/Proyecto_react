@@ -10,10 +10,13 @@ function Pedidos({ usuario }) {
 
     useEffect(() => {
         const cargarPedidos = async () => {
+            console.log("usuario actual:", usuario);
             if (!usuario || !usuario.email) {
+                setPedidos([]); // Vaciar pedidos si no hay usuario
                 setLoading(false);
                 return;
             }
+            setLoading(true);
             const pedidosUsuario = await obtenerPedidosUsuario(usuario.email);
             setPedidos(pedidosUsuario);
             setLoading(false);

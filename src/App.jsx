@@ -44,7 +44,7 @@ function App() {
 
     return (
         <div className="App">
-            <Header className="header" login={login} loginData={loginData} actualizarLogin={actualizarLogin} />
+            <Header className="header" login={login} loginData={loginData} actualizarLogin={actualizarLogin} actualizarLoginData={actualizarLoginData}/>
 
             <div className="main-content">
                 {location.pathname === "/" && (
