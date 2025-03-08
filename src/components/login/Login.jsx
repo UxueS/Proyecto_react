@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { useState, useEffect } from "react"; 
+import { Button, Container, Form, Alert } from "react-bootstrap"; 
 import { useNavigate, useLocation } from "react-router-dom";
 import "./login.css";
 
@@ -8,9 +8,17 @@ function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isRegistering, setIsRegistering] = useState(false); 
+    const [showRedirectAlert, setShowRedirectAlert] = useState(false); // Estado para mostrar alerta
+
     const navigate = useNavigate();
     const location = useLocation();
     const redirectPath = new URLSearchParams(location.search).get("redirect") || "/";
+
+    useEffect(() => {
+        if (redirectPath === "/pedidos" || redirectPath === "/cesta") {
+            setShowRedirectAlert(true);
+        }
+    }, [redirectPath]); // Añadir efecto para detectar redirección
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -32,7 +40,6 @@ function Login(props) {
                     setIsRegistering(false); 
                 } else {
                     alert("Login correcto");
-                    console.log(response);
                     props.actualizarLogin(true); 
                     props.actualizarLoginData(response.data); 
                     navigate(redirectPath); 
@@ -40,15 +47,29 @@ function Login(props) {
             })
             .catch((error) => {
                 alert("Error: " + error.response?.data?.error?.message || "Error desconocido");
-                console.log(error);
             });
     };
+
+    useEffect(() => {
+        const redirectPath = new URLSearchParams(location.search).get("redirect");
+        if (redirectPath === "/pedidos" || redirectPath === "/cesta") {
+            setShowRedirectAlert(true);
+        } else {
+            setShowRedirectAlert(false); // Quitar el mensaje si no hay redirect
+        }
+    }, [location.search]);    
 
     return (
         <Container className="login-container">
             <Form onSubmit={submitHandler} className="login-form">
+                {showRedirectAlert && (
+                    <Alert variant="warning" className="text-center">
+                        ¡Debes iniciar sesión para acceder a esta página!
+                    </Alert>
+                )}
+    
                 <h2 className="login-title">{isRegistering ? "Registro" : "Iniciar sesión"}</h2>
-
+    
                 <Form.Group controlId="formEmail">
                     <Form.Label>Email:</Form.Label>
                     <Form.Control
@@ -59,7 +80,7 @@ function Login(props) {
                         required
                     />
                 </Form.Group>
-
+    
                 <Form.Group controlId="formPassword">
                     <Form.Label>Contraseña:</Form.Label>
                     <Form.Control
@@ -70,11 +91,11 @@ function Login(props) {
                         required
                     />
                 </Form.Group>
-
+    
                 <Button type="submit" variant="primary" className="login-button">
                     {isRegistering ? "Registrarse" : "Iniciar sesión"}
                 </Button>
-
+    
                 <p className="switch-auth">
                     {isRegistering ? "¿Ya tienes una cuenta?" : "¿No tienes cuenta?"}{" "}
                     <span onClick={() => setIsRegistering(!isRegistering)}>
@@ -83,7 +104,7 @@ function Login(props) {
                 </p>
             </Form>
         </Container>
-    );
+    );    
 }
 
 export default Login;

@@ -10,7 +10,6 @@ function Header({ login, loginData, actualizarLogin, actualizarLoginData }) {
         actualizarLoginData(null);     // Borras los datos del usuario explícitamente.
         navigate("/");
     };
-    
 
     return (
         <header className="header">

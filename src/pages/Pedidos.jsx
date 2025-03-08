@@ -52,9 +52,7 @@ function Pedidos({ usuario }) {
 
             {loading ? (
                 <p className="text-center">Cargando pedidos...</p>
-            ) : !usuario ? (
-                <Alert variant="danger" className="text-center">Debes iniciar sesión para ver tus pedidos.</Alert>
-            ) : pedidos.length === 0 ? (
+             ) : pedidos.length === 0 ? (
                 <Alert variant="info" className="text-center">No tienes pedidos registrados.</Alert>
             ) : (
                 <Table striped bordered hover className="shadow-sm text-center" style={{ fontSize: "1.5rem", cursor: "pointer" }}>
