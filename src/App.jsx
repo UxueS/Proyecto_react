@@ -9,7 +9,7 @@ import Cesta from "./pages/Cart";
 import Contacto from "./pages/Contacto";
 import Login from "./components/login/Login";
 import Pedidos from "./pages/Pedidos";
-import saludo from "./components/saludo.json"; // Animación Lottie
+import saludo from "./components/saludo.json"; 
 import "./components/producto.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -41,10 +41,10 @@ function App() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1 }}
                     >
-                        <h1 className="welcome-title">¡Bienvenido a Papelería Trazos! 👋</h1>
+                        <h1 className="welcome-title">¡Bienvenid@ a Papelería Trazos! 👋</h1>
                         <p className="welcome-text">Explora nuestro catálogo y encuentra todo lo que necesitas.</p>
 
-                        {/* 📢 Banner Promocional ENCIMA del monigote */}
+                        
                         <motion.div
                             className="promo-banner"
                             initial={{ opacity: 0, y: -20 }}
@@ -55,7 +55,6 @@ function App() {
                             🎉 ¡Este mes <span>3x2</span> en todos nuestros productos! 🎉
                         </motion.div>
 
-                        {/* 🎬 Animación Lottie */}
                         <Lottie animationData={saludo} className="saludo-animation" loop autoplay />
 
                         <motion.button
