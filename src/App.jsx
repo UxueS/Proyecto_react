@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Route, Routes, useLocation, useNavigate, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
+import { Card } from "react-bootstrap";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 import Productos from "./components/Productos";
@@ -41,30 +42,31 @@ function App() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1 }}
                     >
-                        <h1 className="welcome-title">¡Bienvenid@ a Papelería Trazos! 👋</h1>
-                        <p className="welcome-text">Explora nuestro catálogo y encuentra todo lo que necesitas.</p>
+                        <Card style={{ backgroundColor: "#f3fdfe" }} className="p-4">
+                            <h1 className="welcome-title">¡Bienvenid@ a Papelería Trazos! 👋</h1>
+                            <p className="welcome-text">Explora nuestro catálogo y encuentra todo lo que necesitas.</p>
 
-                        
-                        <motion.div
-                            className="promo-banner"
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1 }}
-                            whileHover={{ scale: 1.05 }}
-                        >
-                            🎉 ¡Este mes <span>3x2</span> en todos nuestros productos! 🎉
-                        </motion.div>
+                            <motion.div
+                                className="promo-banner"
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 1 }}
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                🎉 ¡Este mes <span>3x2</span> en todos nuestros productos! 🎉
+                            </motion.div>
 
-                        <Lottie animationData={saludo} className="saludo-animation" loop autoplay />
+                            <Lottie animationData={saludo} className="saludo-animation" loop autoplay />
 
-                        <motion.button
-                            className="explore-button"
-                            onClick={() => navigate("/productos")}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                        >
-                            Ver catálogo
-                        </motion.button>
+                            <motion.button
+                                className="explore-button"
+                                onClick={() => navigate("/productos")}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                            >
+                                Ver catálogo
+                            </motion.button>
+                        </Card>
                     </motion.div>
                 )}
                 <Routes>
