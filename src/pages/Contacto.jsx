@@ -6,57 +6,62 @@ const Contacto = () => {
     return (
         <Container className="my-4">
             <Row className="justify-content-center">
-                <Col md={6}>
-                    <Card className="shadow-lg p-2 rounded" style={{ backgroundColor: '#f9f9f9' }}>
+                <Col xs={12} md={8} lg={6}>
+                    <Card className="shadow-lg rounded" style={{ backgroundColor: '#f9f9f9' }}>
                         <Card.Body>
                             <h1 className="text-center mb-2" style={{ color: '#12285f', fontWeight: 'bold', fontSize: '1.4rem' }}>Contacto</h1>
                             <p className="text-center mb-3" style={{ color: '#555', fontSize: '0.9rem' }}>
-                                Información de contacto de la Papelería Trazos.
+                                Información de contacto de la Papelería Trazos
                             </p>
 
                             <ListGroup variant="flush">
-                                {/* Propietarios */}
-                                <ListGroup.Item className="border-0 p-1">
+                                <ListGroup.Item className="border-0 p-2">
                                     <h5 className="mb-1" style={{ color: '#12285f', fontSize: '1rem' }}>Propietarias:</h5>
-                                    <p style={{ fontSize: '0.9rem', marginBottom: '0.2rem' }}><strong>Aida Mateo</strong> - Fundadora y CEO</p>
-                                    <p style={{ fontSize: '0.9rem', marginBottom: '0.2rem' }}><strong>Uxue San Miguel</strong> - Co-fundadora y Directora de ventas</p>
+                                    <p className="mb-1"><strong>Aida Mateo</strong> - Fundadora y CEO</p>
+                                    <p><strong>Uxue San Miguel</strong> - Co-fundadora y Directora de ventas</p>
                                 </ListGroup.Item>
 
-                                {/* Dirección */}
-                                <ListGroup.Item className="border-0 p-1">
+                                <ListGroup.Item className="border-0 p-2">
                                     <h5 className="mb-1" style={{ color: '#12285f', fontSize: '1rem' }}>Dirección:</h5>
-                                    <p style={{ fontSize: '0.9rem' }}>Calle María Lacunza, 31, Pamplona, 31006</p>
+                                    <p className="mb-0">Calle María Lacunza, 31, Pamplona, 31006</p>
                                 </ListGroup.Item>
 
-                                {/* Correo electrónico */}
-                                <ListGroup.Item className="border-0 p-1">
+                                <ListGroup.Item className="border-0 p-2">
                                     <h5 className="mb-1" style={{ color: '#12285f', fontSize: '1rem' }}>Correo electrónico:</h5>
-                                    <p style={{ fontSize: '0.9rem' }}><a href="mailto:contacto@papeleriatrazo.com" style={{ color: '#12285f', textDecoration: 'none', fontWeight: '500' }}>contacto@papeleriatrazo.com</a></p>
+                                    <p className="mb-0">
+                                        <a href="mailto:contacto@papeleriatrazo.com" className="text-decoration-none" style={{ color: '#12285f' }}>
+                                            contacto@papeleriatrazo.com
+                                        </a>
+                                    </p>
                                 </ListGroup.Item>
 
-                                {/* Teléfono (solo texto) */}
-                                <ListGroup.Item className="border-0 p-1">
+                                <ListGroup.Item className="border-0 p-2">
                                     <h5 className="mb-1" style={{ color: '#12285f', fontSize: '1rem' }}>Teléfono:</h5>
-                                    <p style={{ fontSize: '0.9rem' }}>948 123 456</p>
+                                    <p className="mb-0">948 123 456</p>
                                 </ListGroup.Item>
 
-                                {/* Redes sociales */}
-                                <ListGroup.Item className="border-0 text-center p-1">
-                                    <h5 className="mb-2" style={{ color: '#12285f', fontSize: '1rem' }}>Redes sociales:</h5>
-                                    <div className="d-flex justify-content-center gap-2">
-                                        <Button variant="outline-primary" className="d-flex align-items-center" style={{ fontSize: '0.7rem', padding: '0.3rem 0.6rem' }} disabled>
-                                            <FaFacebook size={16} className="me-2" />
-                                            <span>@papeleriatrazos</span>
-                                        </Button>
-                                        <Button variant="outline-info" className="d-flex align-items-center" style={{ fontSize: '0.7rem', padding: '0.3rem 0.6rem' }} disabled>
-                                            <FaInstagram size={16} className="me-2" />
-                                            <span>@papeleriatrazos</span>
-                                        </Button>
-                                        <Button variant="outline-success" className="d-flex align-items-center" style={{ fontSize: '0.7rem', padding: '0.3rem 0.6rem' }} disabled>
-                                            <FaTwitter size={16} className="me-2" />
-                                            <span>@papeleriatrazos</span>
-                                        </Button>
-                                    </div>
+                                <ListGroup.Item className="border-0 p-2">
+                                    <h5 className="text-center mb-3" style={{ color: '#12285f', fontSize: '1rem' }}>Redes sociales:</h5>
+                                    <Row className="justify-content-center g-2">
+                                        <Col xs={12} sm="auto" className="d-flex justify-content-center">
+                                            <Button variant="outline-primary" size="sm" disabled className="d-flex align-items-center">
+                                                <FaFacebook size={16} className="me-2" />
+                                                <span>@papeleriatrazos</span>
+                                            </Button>
+                                        </Col>
+                                        <Col xs={12} sm="auto" className="d-flex justify-content-center">
+                                            <Button variant="outline-info" size="sm" disabled className="d-flex align-items-center">
+                                                <FaInstagram size={16} className="me-2" />
+                                                <span>@papeleriatrazos</span>
+                                            </Button>
+                                        </Col>
+                                        <Col xs={12} sm="auto" className="d-flex justify-content-center">
+                                            <Button variant="outline-success" size="sm" disabled className="d-flex align-items-center">
+                                                <FaTwitter size={16} className="me-2" />
+                                                <span>@papeleriatrazos</span>
+                                            </Button>
+                                        </Col>
+                                    </Row>
                                 </ListGroup.Item>
                             </ListGroup>
                         </Card.Body>
