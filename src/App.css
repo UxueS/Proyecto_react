@@ -18,9 +18,9 @@
 
 .main-content {
   width: 100vw;
-  padding-top: 100px;
-  margin-bottom: 100px;
-  /* Separación adicional entre contenido y footer */
+  padding-top: 80px;
+  margin-bottom:80px;
+
 }
 
 .logo {
@@ -83,7 +83,7 @@
   margin-bottom: 20px;
 }
 
-/* 🎬 Ajustes de la animación */
+
 .saludo-animation {
   width: 250px;
   margin: 20px auto;
@@ -99,14 +99,14 @@
   cursor: pointer;
   transition: background 0.3s ease;
   margin-bottom: 20px;
-  /* Aumentar la separación con el footer */
+  
 }
 
 .explore-button:hover {
   background-color: #0d1f4a;
 }
 
-/* Footer */
+
 footer {
   text-align: center;
   padding: 10px;
