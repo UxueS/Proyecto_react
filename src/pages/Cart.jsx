@@ -14,12 +14,11 @@ function Cart({ usuario }) {
     const [showThankYou, setShowThankYou] = useState(false);
     const [formData, setFormData] = useState({ nombre: "", email: "", direccion: "" });
     const [ofertaAplicada, setOfertaAplicada] = useState(false);
-    const [descuento, setDescuento] = useState(0); // Dinero descontado por la oferta
+    const [descuento, setDescuento] = useState(0); 
     const navigate = useNavigate();
 
-     // Función para lanzar confeti durante 2 segundos
      const lanzarConfeti = () => {
-        const duration = 2000; // ⏳ Duración del efecto (2s)
+        const duration = 2000; 
         const end = Date.now() + duration;
         
         const frame = () => {
@@ -37,34 +36,33 @@ function Cart({ usuario }) {
         frame();
     };
 
-    // Calcular el total de productos en el carrito
+    
     const totalCantidadProductos = cart.reduce((total, item) => total + (item.cantidad || 0), 0);
 
-    // Calcular el total de la compra sin descuento
+    
     const totalSinDescuento = cart.reduce((total, item) => {
         const precioUnitario = parseFloat(item.precio) || 0;
         const cantidad = item.cantidad || 0;
         return total + (precioUnitario * cantidad);
     }, 0);
 
-    // Calcular el total con descuento aplicado por la oferta "3x2"
     const totalConDescuento = cart.reduce((total, item) => {
         const precioUnitario = parseFloat(item.precio) || 0;
         const cantidad = item.cantidad || 0;
 
-        const unidadesDescontadas = Math.floor(cantidad / 3);  // Cada 3 unidades, 1 gratis
+        const unidadesDescontadas = Math.floor(cantidad / 3);  
         const cantidadConDescuento = cantidad - unidadesDescontadas;
 
-        // Si la oferta no se ha aplicado, la aplicamos
+        
         if (unidadesDescontadas > 0 && !ofertaAplicada) {
             setOfertaAplicada(true);
-            setDescuento(precioUnitario * unidadesDescontadas); // Guardamos el dinero descontado
+            setDescuento(precioUnitario * unidadesDescontadas); 
         }
 
         return total + (precioUnitario * cantidadConDescuento);
     }, 0);
 
-    // Calcular la diferencia entre el total sin descuento y el total con descuento
+   
     const diferenciaDescuento = totalSinDescuento - totalConDescuento;
 
     const handleInputChange = (e) => {
@@ -211,13 +209,13 @@ function Cart({ usuario }) {
                             </li>
                         ))}
                     </ul>
-                    <h4 className="fw-bold text-end mt-3">Total sin descuento: {totalSinDescuento.toFixed(2)} €</h4>
+                    <h5 className="fw-bold text-end mt-3">Total sin descuento: {totalSinDescuento.toFixed(2)} €</h5>
                     {diferenciaDescuento > 0 && (
-                        <h4 className="fw-bold text-end mt-2 text-danger">
+                        <h5 className="fw-bold text-end mt-2 text-danger">
                             Descuento: -{diferenciaDescuento.toFixed(2)} €
-                        </h4>
+                        </h5>
                     )}
-                    <h4 className="fw-bold text-end mt-2">Total con descuento: {totalConDescuento.toFixed(2)} €</h4>
+                    <h5 className="fw-bold text-end mt-2">Total con descuento: {totalConDescuento.toFixed(2)} €</h5>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>

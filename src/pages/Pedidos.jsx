@@ -12,7 +12,7 @@ function Pedidos({ usuario }) {
         const cargarPedidos = async () => {
             console.log("usuario actual:", usuario);
             if (!usuario || !usuario.email) {
-                setPedidos([]); // Vaciar pedidos si no hay usuario
+                setPedidos([]); 
                 setLoading(false);
                 return;
             }
@@ -33,12 +33,12 @@ function Pedidos({ usuario }) {
 
     // Función para eliminar un pedido
     const handleEliminarPedido = async (pedidoId, event) => {
-        event.stopPropagation();  // Detener la propagación del clic
+        event.stopPropagation();  
         try {
             const confirmacion = window.confirm("¿Estás seguro de que deseas borrar este pedido?");
             if (confirmacion) {
-                await borrarPedido(pedidoId);  // Llamar al servicio para borrar el pedido
-                setPedidos(pedidos.filter(pedido => pedido.id !== pedidoId));  // Actualizar el estado
+                await borrarPedido(pedidoId);  
+                setPedidos(pedidos.filter(pedido => pedido.id !== pedidoId)); 
                 alert("Pedido eliminado con éxito.");
             }
         } catch (error) {
