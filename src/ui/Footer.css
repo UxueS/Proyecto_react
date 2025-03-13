@@ -4,8 +4,7 @@
     text-align: center;
     padding: 0.5rem 0;
     margin-bottom: 0;
-    align-self: flex-end;
-    
+    width: 100%;
   }
   
   .footer-content p {

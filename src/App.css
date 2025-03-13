@@ -1,13 +1,15 @@
 #root {
-  width: 100vw;
-  min-height: 100vh;
- 
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  text-align: center;
-  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column; /* Para alinear Header, main-content y Footer en columna */
+  flex: 1; /* Que ocupe todo el espacio disponible */
+  width: 100%; /* Que no se quede encogido */
+  min-height: 100vh; /* Asegura que al menos ocupe toda la pantalla */
 }
 
 .container-fluid {
@@ -19,8 +21,13 @@
 .main-content {
   width: 100vw;
   padding-top: 20px;
-  margin-bottom:80px;
-
+  margin-bottom: 80px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* opcional, para centrar dentro */
+  justify-content: flex-start; 
+  text-align: center;
 }
 
 .logo {
