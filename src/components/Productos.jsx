@@ -40,8 +40,8 @@ function Productos() {
                         } else if (
                             producto.nombre === "Goma de borrar" ||
                             producto.nombre === "Pinturas" ||
-                            producto.nombre === "Tijeras" ||
-                            producto.nombre === "Barra de pegamento"
+                            producto.nombre === "Lápiz" ||
+                            producto.nombre === "Regla"
                         ) {
                             producto.categoria = "Material de dibujo";
                         } else if (
@@ -67,9 +67,9 @@ function Productos() {
             const nuevoFiltro = { ...prevFiltros };
             
             if (nuevoFiltro[tipo] === valor) {
-                nuevoFiltro[tipo] = null;  // Si ya está seleccionado, lo desactivamos
+                nuevoFiltro[tipo] = null;  
             } else {
-                nuevoFiltro[tipo] = valor; // Si no está seleccionado, lo activamos
+                nuevoFiltro[tipo] = valor; 
             }
             
             return nuevoFiltro;
