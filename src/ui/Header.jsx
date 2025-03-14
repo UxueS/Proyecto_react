@@ -13,10 +13,12 @@ function Header({ login, loginData, actualizarLogin, actualizarLoginData }) {
 
     return (
         <header className="header">
+            {/* Se agrupa el logo y el nombre en un div para que estén juntos */}
             <div className="logo-container">
                 <img src="/icons/logo.jpg" alt="Logo Trazos" className="logo-img" />
+                <span className="brand-name">Papelería Trazos</span>
             </div>
-            <div className="brand-name">Papelería Trazos</div>
+            
             <nav className="nav">
                 <ul>
                     <li><Link to="/">Inicio</Link></li>

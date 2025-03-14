@@ -8,7 +8,7 @@ function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isRegistering, setIsRegistering] = useState(false); 
-    const [showRedirectAlert, setShowRedirectAlert] = useState(false); // Estado para mostrar alerta
+    const [showRedirectAlert, setShowRedirectAlert] = useState(false); 
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -18,7 +18,7 @@ function Login(props) {
         if (redirectPath === "/pedidos" || redirectPath === "/cesta") {
             setShowRedirectAlert(true);
         }
-    }, [redirectPath]); // Añadir efecto para detectar redirección
+    }, [redirectPath]); 
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -55,7 +55,7 @@ function Login(props) {
         if (redirectPath === "/pedidos" || redirectPath === "/cesta") {
             setShowRedirectAlert(true);
         } else {
-            setShowRedirectAlert(false); // Quitar el mensaje si no hay redirect
+            setShowRedirectAlert(false);
         }
     }, [location.search]);    
 
@@ -81,7 +81,7 @@ function Login(props) {
                     />
                 </Form.Group>
     
-                <Form.Group controlId="formPassword">
+                <Form.Group controlId="formPassword" className="password-group">
                     <Form.Label>Contraseña:</Form.Label>
                     <Form.Control
                         type="password"

@@ -55,7 +55,7 @@ function App() {
                         transition={{ duration: 1 }}
                     >
                         <Card style={{ backgroundColor: "#f3fdfe" }} className="p-4">
-                            <h1 className="welcome-title">
+                            <h2 className="welcome-title">
                                 ¡Bienvenid@ a Papelería Trazos!{" "}
                                 <motion.span
                                     animate={{ rotate: [0, 20, -20, 20, -20, 0] }}
@@ -64,7 +64,7 @@ function App() {
                                 >
                                     👋
                                 </motion.span>
-                            </h1>
+                            </h2>
                             <p className="welcome-text">Explora nuestro catálogo y encuentra todo lo que necesitas.</p>
 
                             <motion.div

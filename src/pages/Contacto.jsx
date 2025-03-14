@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, ListGroup, Card, Button } from 'react-bootstrap';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaTiktok } from 'react-icons/fa6';
 
 const Contacto = () => {
     return (
@@ -58,6 +59,12 @@ const Contacto = () => {
                                         <Col xs={12} sm="auto" className="d-flex justify-content-center">
                                             <Button variant="outline-success" size="sm" disabled className="d-flex align-items-center">
                                                 <FaTwitter size={16} className="me-2" />
+                                                <span>@papeleriatrazos</span>
+                                            </Button>
+                                        </Col>
+                                        <Col xs={12} sm="auto" className="d-flex justify-content-center">
+                                            <Button variant="outline-dark" size="sm" disabled className="d-flex align-items-center">
+                                                <FaTiktok size={16} className="me-2" />
                                                 <span>@papeleriatrazos</span>
                                             </Button>
                                         </Col>
