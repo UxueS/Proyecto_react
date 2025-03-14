@@ -7,6 +7,7 @@ import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 import Login from "./components/login/Login";
 import saludo from "./components/saludo.json";
+import ValoracionesClientes from "./components/ValoracionesClientes";
 import "./components/producto.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -100,6 +101,9 @@ function App() {
                     </Routes>
                 </Suspense>
             </div>
+
+            <ValoracionesClientes />
+
             <Footer />
         </div>
     );
