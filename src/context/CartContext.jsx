@@ -5,7 +5,6 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
-    // Función para añadir productos al carrito
     const addToCart = (producto, cantidad) => {
         if (cantidad > 0) {
             setCart(prevCart => {
@@ -24,12 +23,10 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    // Función para eliminar un producto del carrito
     const eliminarItemCarrito = (index) => {
-        setCart(prevCart => prevCart.filter((_, i) => i !== index)); // Eliminar por índice
+        setCart(prevCart => prevCart.filter((_, i) => i !== index)); 
     };
 
-    // Función para vaciar el carrito
     const vaciarCarrito = () => {
         setCart([]);
     };

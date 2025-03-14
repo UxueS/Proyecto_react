@@ -42,7 +42,6 @@ const Bienvenida = () => {
           🎉 ¡Este mes <span>3x2</span> en todos nuestros productos! 🎉
         </motion.div>
 
-        {/* Contenedor para botón + animación */}
         <div className="cta-container">
             <Lottie
                 animationData={saludo}

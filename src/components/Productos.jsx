@@ -14,7 +14,6 @@ function Productos() {
             .then((response) => {
                 if (response.data) {
                     const productosArray = Object.values(response.data).map((producto) => {
-                        // Asignamos las categorías de los productos
                         if (
                             producto.nombre === "Lápiz" ||
                             producto.nombre === "Bolígrafo"
@@ -30,7 +29,6 @@ function Productos() {
                             producto.nombre === "Regla" ||
                             producto.nombre === "Subrayador"|| 
                             producto.nombre === "Cuaderno"
-
                         ) {
                             producto.categoria = "Artículos de oficina";
                         } else if (
@@ -85,7 +83,6 @@ function Productos() {
         const busquedaLower = removeAccents(busqueda.toLowerCase());
         let productoValido = nombreLower.includes(busquedaLower);
 
-        // Filtro por precio
         if (filtros.precio) {
             const precio = parseFloat(producto.precio);
             if (filtros.precio === "1") productoValido = productoValido && precio < 1;
@@ -93,7 +90,6 @@ function Productos() {
             if (filtros.precio === "15") productoValido = productoValido && precio < 15;
         }
 
-        // Filtro por categoría
         if (filtros.categoria && producto.categoria !== filtros.categoria) {
             productoValido = false;
         }

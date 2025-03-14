@@ -11,7 +11,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./App.css";
 
-// Lazy load components
 const Productos = lazy(() => import("./components/Productos"));
 const Cesta = lazy(() => import("./pages/Cart"));
 const Contacto = lazy(() => import("./pages/Contacto"));

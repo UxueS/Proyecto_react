@@ -38,8 +38,6 @@
     font-size: 1rem;
 }
 
-
-
 .login-button {
     width: 100%;
     padding: 0.75rem;
@@ -50,7 +48,6 @@
     border: none;
     border-radius: 5px;
     transition: background 0.3s ease-in-out;
-
 }
 
 .login-button:hover {

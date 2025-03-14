@@ -7,7 +7,6 @@ function ValoracionesClientes() {
             <h2 className="text-center mb-4">Opiniones reales de clientes satisfechos</h2>
 
             <Row className="g-4">
-                {/* Valoración 1 */}
                 <Col md={3} sm={6}>
                     <div className="border border-dark p-4 h-100 rounded shadow-sm bg-white text-center">
                         <img src="/icons/cliente1.jpg" alt="Cliente feliz" className="img-fluid rounded-circle mb-3" style={{ width: "120px", height: "120px", objectFit: "cover" }} />
@@ -16,7 +15,6 @@ function ValoracionesClientes() {
                         <p className="text-warning mb-0">⭐⭐⭐⭐⭐</p>
                     </div>
                 </Col>
-                {/* Valoración 2 */}
                 <Col md={3} sm={6}>
                     <div className="border border-dark p-4 h-100 rounded shadow-sm bg-white text-center">
                         <img src="/icons/cliente2.jpg" alt="Cliente satisfecho" className="img-fluid rounded-circle mb-3" style={{ width: "120px", height: "120px", objectFit: "cover" }} />
@@ -25,7 +23,6 @@ function ValoracionesClientes() {
                         <p className="text-warning mb-0">⭐⭐⭐⭐⭐</p>
                     </div>
                 </Col>
-                {/* Valoración 3 */}
                 <Col md={3} sm={6}>
                     <div className="border border-dark p-4 h-100 rounded shadow-sm bg-white text-center">
                         <img src="/icons/cliente3.jpg" alt="Cliente contento" className="img-fluid rounded-circle mb-3" style={{ width: "120px", height: "120px", objectFit: "cover" }} />
@@ -34,7 +31,6 @@ function ValoracionesClientes() {
                         <p className="text-warning mb-0">⭐⭐⭐⭐⭐</p>
                     </div>
                 </Col>
-                {/* Valoración 4 */}
                 <Col md={3} sm={6}>
                     <div className="border border-dark p-4 h-100 rounded shadow-sm bg-white text-center">
                         <img src="/icons/cliente4.jpg" alt="Cliente contento" className="img-fluid rounded-circle mb-3" style={{ width: "120px", height: "120px", objectFit: "cover" }} />

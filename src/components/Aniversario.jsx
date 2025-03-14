@@ -49,7 +49,7 @@ function Aniversario() {
                 </div>
             </div>
 
-            {/* Modal Informativo */}
+            {/* Modal informativo */}
             <Modal show={showModal} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>🎉 Detalles de la promoción 3x2 🎉</Modal.Title>
