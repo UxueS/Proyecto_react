@@ -50,7 +50,7 @@ function App() {
                     <>
                         <Bienvenida /> 
                         <Aniversario />
-                         <ValoracionesClientes />
+                        <ValoracionesClientes />
                     </>
                 )}
                 <Suspense fallback={<div>Loading...</div>}>
