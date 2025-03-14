@@ -8,6 +8,7 @@ import Footer from "./ui/Footer";
 import Login from "./components/login/Login";
 import saludo from "./components/saludo.json";
 import ValoracionesClientes from "./components/ValoracionesClientes";
+import Aniversario from "./components/Aniversario";
 import "./components/producto.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -49,6 +50,7 @@ function App() {
 
             <div className="main-content">
                 {location.pathname === "/" && (
+                    <>
                     <motion.div
                         className="welcome-container"
                         initial={{ opacity: 0, y: -50 }}
@@ -90,6 +92,11 @@ function App() {
                             </motion.button>
                         </Card>
                     </motion.div>
+
+                    <Aniversario />
+                    <ValoracionesClientes />
+                    
+                    </>
                 )}
                 <Suspense fallback={<div>Loading...</div>}>
                     <Routes>
@@ -101,9 +108,6 @@ function App() {
                     </Routes>
                 </Suspense>
             </div>
-
-            <ValoracionesClientes />
-
             <Footer />
         </div>
     );
