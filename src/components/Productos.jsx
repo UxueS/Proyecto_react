@@ -107,7 +107,7 @@ function Productos() {
                 <DropdownButton
                     variant="outline-primary"
                     id="dropdown-basic-button"
-                    title="Añadir filtros"
+                    title="Filtrar productos"
                     className="me-2"
                 >
                     <Dropdown.ItemText><strong>Filtrar por precio</strong></Dropdown.ItemText>
