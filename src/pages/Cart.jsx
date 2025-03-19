@@ -128,27 +128,25 @@ function Cart({ usuario }) {
                 </Card>
             ) : (
                 <>
-                    <Table striped bordered hover className="shadow-sm" style={{ fontSize: "1.5rem", borderCollapse: "separate", borderSpacing: "0 10px" }}>
+                    <Table responsive="md" striped bordered hover className="shadow-sm table-responsive">
                         <thead>
-                            <tr className="bg-primary text-white" style={{ fontSize: "1.6rem" }}>
-                                <th style={{ minWidth: "250px", padding: "15px" }}>Producto</th>
-                                <th style={{ minWidth: "200px", padding: "15px" }}>Cantidad</th>
-                                <th style={{ minWidth: "250px", padding: "15px" }}>Precio unitario</th>
-                                <th style={{ minWidth: "250px", padding: "15px" }}>Total</th>
-                                <th style={{ padding: "15px" }}>Eliminar</th>
+                            <tr className="bg-primary text-white text-center">
+                                <th style={{ minWidth: "180px" }}>Producto</th>
+                                <th style={{ minWidth: "120px" }}>Cantidad</th>
+                                <th style={{ minWidth: "160px" }}>Precio unitario</th>
+                                <th style={{ minWidth: "160px" }}>Total</th>
+                                <th style={{ minWidth: "100px" }}>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                             {cart.map((item, index) => (
-                                <tr key={index} style={{ fontSize: "1.4rem" }}>
-                                    <td style={{ padding: "12px" }}>{item.nombre.trim()}</td>
-                                    <td style={{ padding: "12px" }}>{item.cantidad || 0}</td>
-                                    <td style={{ padding: "12px" }}>{item.precio ? `${parseFloat(item.precio).toFixed(2)} €` : "0.00 €"}</td>
-                                    <td style={{ padding: "12px" }}>
-                                        {item.precio ? `${(parseFloat(item.precio) * item.cantidad).toFixed(2)} €` : "0.00 €"}
-                                    </td>
-                                    <td style={{ padding: "12px" }}>
-                                        <Button variant="danger" size="sm" onClick={() => eliminarItem(index)} style={{ fontSize: "1rem" }}>
+                                <tr key={index} className="text-center">
+                                    <td>{item.nombre.trim()}</td>
+                                    <td>{item.cantidad || 0}</td>
+                                    <td>{item.precio ? `${parseFloat(item.precio).toFixed(2)} €` : "0.00 €"}</td>
+                                    <td>{item.precio ? `${(parseFloat(item.precio) * item.cantidad).toFixed(2)} €` : "0.00 €"}</td>
+                                    <td>
+                                        <Button variant="danger" size="sm" onClick={() => eliminarItem(index)}>
                                             🗑️
                                         </Button>
                                     </td>
