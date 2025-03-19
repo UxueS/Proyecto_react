@@ -133,7 +133,7 @@ function Cart({ usuario }) {
                             <tr className="bg-primary text-white" style={{ fontSize: "1.6rem" }}>
                                 <th style={{ minWidth: "250px", padding: "15px" }}>Producto</th>
                                 <th style={{ minWidth: "200px", padding: "15px" }}>Cantidad</th>
-                                <th style={{ minWidth: "250px", padding: "15px" }}>Precio Unitario</th>
+                                <th style={{ minWidth: "250px", padding: "15px" }}>Precio unitario</th>
                                 <th style={{ minWidth: "250px", padding: "15px" }}>Total</th>
                                 <th style={{ padding: "15px" }}>Eliminar</th>
                             </tr>
@@ -226,7 +226,7 @@ function Cart({ usuario }) {
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label htmlFor="nombre">Nombre</Form.Label>
+                            <Form.Label htmlFor="nombre">Nombre y apellidos</Form.Label>
                             <Form.Control 
                                 type="text" 
                                 id="nombre" 
@@ -252,7 +252,7 @@ function Cart({ usuario }) {
                         </Form.Group>
 
                         <Form.Group>
-                            <Form.Label htmlFor="direccion">Dirección de Envío</Form.Label>
+                            <Form.Label htmlFor="direccion">Dirección de envío</Form.Label>
                             <Form.Control 
                                 type="text" 
                                 id="direccion" 
