@@ -44,8 +44,8 @@
   padding: 0;
   max-width: 1200px;
   border-radius: 12px;
-  background: none; /* Quitamos fondo */
-  box-shadow: none; /* Quitamos sombra */
+  background: none; 
+  box-shadow: none; 
 }
 
 .welcome-title {

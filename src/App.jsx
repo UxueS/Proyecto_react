@@ -18,7 +18,6 @@ const Pedidos = lazy(() => import("./pages/Pedidos"));
 
 function App() {
     const location = useLocation();
-    const navigate = useNavigate();
     const [login, setLogin] = useState(false);
     const [loginData, setLoginData] = useState(null);
     const [loading, setLoading] = useState(false);

@@ -13,7 +13,7 @@
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* Reduce el espacio entre el logo y el texto */
+  gap: 0.5rem; 
 }
 
 .logo-img {
